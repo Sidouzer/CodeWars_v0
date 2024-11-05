@@ -16,27 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import group_4.galaxyMyAdmin.Enumerations.PiloteRank;
 import group_4.galaxyMyAdmin.Enumerations.PiloteStatus;
 import group_4.galaxyMyAdmin.Enumerations.Race;
-import group_4.galaxyMyAdmin.Models.Activity;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
-import group_4.galaxyMyAdmin.Services.ActivityServiceImpl;
-import group_4.galaxyMyAdmin.Services.MissionServiceImpl;
 import group_4.galaxyMyAdmin.Services.PilotServiceImpl;
 
 
 @Controller
 @RequestMapping("/pilots")
-public class PilotsListController {
+public class PilotsController {
 
     @Autowired
     PilotServiceImpl piloteService;
-
-    @Autowired
-    ActivityServiceImpl activityService;
-
-    @Autowired
-    MissionServiceImpl missionService;
-
 
     @GetMapping("")
     public String getPilotsList(@RequestParam(value = "status", required = false) List<String> status, Model model) {
@@ -58,17 +48,17 @@ public class PilotsListController {
     
     @GetMapping("/{id}")
     public String getMethodName(@PathVariable Long id, Model model) {
-        model.addAttribute("pilot", piloteService.findById(id));
-        List<Activity> activities = activityService.findByPilot_id(id);
+        Pilot pilot = piloteService.findById(id);
+        model.addAttribute("pilot", pilot);
         List<Mission> missions = new ArrayList<>();
         try {
-            activities.forEach(activity -> {
+            pilot.getActivities().forEach(activity -> {
                 missions.add(activity.getMission());
             });
             model.addAttribute("pilotMissions", missions);
         } catch (NullPointerException | UnsupportedOperationException | 
                  IllegalArgumentException ex) {
-            model.addAttribute("noMissions", "No missions");
+            model.addAttribute("error", "Something went wrong, please refresh page");
         }
         return "pilotInfo";
     }
