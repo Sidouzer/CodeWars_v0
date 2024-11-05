@@ -26,7 +26,7 @@
         </section>
         <div>
             <h2>Missions</h2>
-            <th:block th:if="${pilotMissions != null}">
+            <th:block th:if="${!pilotMissions.isEmpty()}">
                 <table>
                     <thead>
                         <tr>
@@ -35,7 +35,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         <tr th:each="mission : ${pilotMissions}">
                             <td th:text="${mission.title}"></td>
                             <td th:text="${mission.status}"></td>
@@ -44,8 +43,8 @@
                     </tbody>
                 </table>
             </th:block>
-            <th:block th:unless="${pilotMissions != null}">
-                <p th:text="${noMissions}"></p>
+            <th:block th:unless="${!pilotMissions.isEmpty()}">
+                <p>NO MISSIONS YET</p>
             </th:block>
         </div>
     </main>
