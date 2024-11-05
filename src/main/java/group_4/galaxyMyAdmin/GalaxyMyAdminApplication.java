@@ -17,10 +17,9 @@ public class GalaxyMyAdminApplication implements CommandLineRunner{
 	public static void main(String[] args) {
 		SpringApplication.run(GalaxyMyAdminApplication.class, args);
 	}
-
+	
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 	}
 	
 	@Bean

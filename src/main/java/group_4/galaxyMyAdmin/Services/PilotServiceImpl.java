@@ -1,6 +1,7 @@
 package group_4.galaxyMyAdmin.Services;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -22,13 +23,16 @@ public class PilotServiceImpl implements Service<Pilot>{
 
     @Override
     public Pilot findById(Long id) {
-        return pilRepo.findById(id).get();
+        try {
+            return pilRepo.findById(id).get();
+        } catch (IllegalArgumentException | NoSuchElementException ex) {
+            return null;
+        }
     }
 
     @Override
     public void save(Pilot obj) {
-        // TODO Auto-generated method stub
-        
+        pilRepo.save(obj);
     }
 
     

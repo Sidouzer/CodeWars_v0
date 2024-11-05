@@ -41,6 +41,21 @@ public class Pilot implements Serializable{
     public Pilot() {
     }
 
+    
+
+    public Pilot(String firstname, String lastname, Race race, LocalDate registrationDate, int registrationAge,
+            PiloteStatus status, PiloteRank rank) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.race = race;
+        this.registrationDate = registrationDate;
+        this.registrationAge = registrationAge;
+        this.status = status;
+        this.rank = rank;
+    }
+
+
+
     public Long getId() {
         return id;
     }
