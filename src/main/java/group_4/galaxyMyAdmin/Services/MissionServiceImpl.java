@@ -1,6 +1,8 @@
 package group_4.galaxyMyAdmin.Services;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,22 +16,21 @@ public class MissionServiceImpl implements Service<Mission>{
 
     @Override
     public Collection<Mission> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+        // Convertit un Iterable en Collection via StreamSupport
+    return StreamSupport.stream(misRepo.findAll().spliterator(), false)
+                        .collect(Collectors.toList());
     }
-
     @Override
     public Mission findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            return misRepo.findById(id).get(); // Return une mission en fonction de l'id
+        } catch (Exception e) {
+            return null;
+        }
     }
-
     @Override
     public void save(Mission obj) {
-        // TODO Auto-generated method stub
-        
+        // Enregistre ou met à jour une mission
+        misRepo.save(obj);
     }
-
-    
-
 }

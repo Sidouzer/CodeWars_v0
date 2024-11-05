@@ -80,6 +80,4 @@ public class Mission implements Serializable{
     public void setActivities(Set<Activity> activities) {
         this.activities = activities;
     }
-
-    
 }

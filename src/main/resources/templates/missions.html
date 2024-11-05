@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Missions Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+
+        td a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        td a:hover {
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>On-going</th>
+                <th>Succeded</th>
+                <th>Failure</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!-- Boucle Thymeleaf pour les missions "On-going" -->
+                <td>
+                    <ul>
+                        <li th:each="missions : ${ongoingMissions}">
+                            <a th:href="@{/missions/details(id=${missions.id})}" 
+                               th:text="${missions.description}">Missions</a>
+                        </li>
+                    </ul>
+                </td>
+
+                <!-- Boucle Thymeleaf pour les missions "Succeded" -->
+                <td>
+                    <ul>
+                        <li th:each="missions : ${succededMissions}">
+                            <a th:href="@{/missions/details(id=${mission.id})}" 
+                               th:text="${missions.description}">Missions</a>
+                        </li>
+                    </ul>
+                </td>
+                <!-- Boucle Thymeleaf pour les missions "Failure" -->
+                <td>
+                    <ul>
+                        <li th:each="missions : ${failureMissions}">
+                            <a th:href="@{/missions/details(id=${missions.id})}" 
+                               th:text="${missions.description}">Missions</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

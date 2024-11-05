@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mission Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+
+        td a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        td a:hover {
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Pilots</th>
+                <th>Ships</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Boucle Thymeleaf pour les pilotes -->
+            <td>
+                <ul>
+                    <li th:each="pilotes : ${Pilotes}">
+                        <a th:href="@{/pilotes/details(id=${pilotes.id})}" 
+                           th:text="${pilotes.name}">Pilotes</a>
+                    </li>
+                </ul>
+            </td>
+            <!-- Boucle Thymeleaf pour les vaisseaux -->
+            <td>
+                <ul>
+                    <li th:each="ships : ${Ships}">
+                        <a th:href="@{/ships/details(id=${ships.id})}" 
+                           th:text="${ships.name}">Ships</a>
+                    </li>
+                </ul>
+            </td>
+        </tbody>
+    </table>
+</body>
+</html>
