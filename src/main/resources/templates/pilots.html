@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Pilots</title>
+    <script th:src="@{/js/searchPilot.js}" defer></script>
+</head>
+
+<body>
+
+    <div th:replace="~{header :: header}"></div>
+
+    <main>
+        <div><input type="search" id="search" name="search" oninput="search(event)">Search by name</div>
+        <form method="get" action="/pilots">
+            <div>
+                <p>Select specific status</p>
+                <div>
+                    <label for="Operational">Operational</label>
+                    <input type="checkbox" name="status" value="Operational"
+                        th:checked="${status != null && status.contains('Operational')}">
+                    <label for="Injured">Injured</label>
+                    <input type="checkbox" name="status" value="Injured"
+                        th:checked="${status != null && status.contains('Injured')}">
+                    <label for="Deceased">Deceased</label>
+                    <input type="checkbox" name="status" value="Deceased"
+                        th:checked="${status != null && status.contains('Deceased')}">
+                </div>
+                <button type="submit">Apply Filters</button>
+            </div>
+        </form>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Surname</th>
+                        <th>Rank</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pilot: ${filteredPilots}">
+                        <td th:text="${pilot.id}"></td>
+                        <td th:text="${pilot.firstname}"></td>
+                        <td th:text="${pilot.lastname}"></td>
+                        <td th:text="${pilot.rank}"></td>
+                        <td th:text="${pilot.status}"></td>
+                        <td><a th:href="@{/pilots/{id}(id=${pilot.id})}">Details</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

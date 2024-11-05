@@ -12,12 +12,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@Entity
+@Entity(name = "missions")
 public class Mission implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+
+    String title;
 
     MissionType type;
 
@@ -80,4 +82,18 @@ public class Mission implements Serializable{
     public void setActivities(Set<Activity> activities) {
         this.activities = activities;
     }
+
+
+
+    public String getTitle() {
+        return title;
+    }
+
+
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    
 }

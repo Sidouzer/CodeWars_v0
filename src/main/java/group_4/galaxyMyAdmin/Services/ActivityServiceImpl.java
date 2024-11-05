@@ -1,6 +1,7 @@
 package group_4.galaxyMyAdmin.Services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,8 +27,11 @@ public class ActivityServiceImpl implements Service<Activity>{
 
     @Override
     public void save(Activity obj) {
-        // TODO Auto-generated method stub
-        
+        // TODO Auto-generated method stub      
+    }
+
+    public List<Activity> findByPilot_id(Long id) {
+        return actRepo.findByPilot_id(id);
     }
 
 }
