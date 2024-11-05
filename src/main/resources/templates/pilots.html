@@ -39,14 +39,14 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody id="pilotsList">
-                    <tr id="pilotLine" th:each="pilot: ${filteredPilots}">
+                <tbody>
+                    <tr th:each="pilot: ${filteredPilots}">
                         <td th:text="${pilot.id}"></td>
                         <td th:text="${pilot.firstname}"></td>
                         <td th:text="${pilot.lastname}"></td>
                         <td th:text="${pilot.rank}"></td>
                         <td th:text="${pilot.status}"></td>
-                        <td><a href="/pilot(id=${pilot.id})">Details</a></td>
+                        <td><a th:href="@{/pilots/{id}(id=${pilot.id})}">Details</a></td>
                     </tr>
                 </tbody>
             </table>

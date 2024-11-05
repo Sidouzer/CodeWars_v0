@@ -19,6 +19,8 @@ public class Mission implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    String title;
+
     MissionType type;
 
     String description;
@@ -79,6 +81,18 @@ public class Mission implements Serializable{
 
     public void setActivities(Set<Activity> activities) {
         this.activities = activities;
+    }
+
+
+
+    public String getTitle() {
+        return title;
+    }
+
+
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     

@@ -35,6 +35,8 @@ public class Pilot implements Serializable{
 
     PiloteRank rank;
 
+    int flightHours;
+
     @OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
     Set<Activity> activities;
 
@@ -126,6 +128,18 @@ public class Pilot implements Serializable{
 
     public void setActivities(Set<Activity> activities) {
         this.activities = activities;
+    }
+
+
+
+    public int getFlightHours() {
+        return flightHours;
+    }
+
+
+
+    public void setFlightHours(int flightHours) {
+        this.flightHours = flightHours;
     }
 
     
