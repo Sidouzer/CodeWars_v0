@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Mission Dashboard</title>
+    <title>Mission details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,33 +41,33 @@
     </style>
 </head>
 <body>
+    <h1 th:text="${mission.name}">Mission title</h1>
+    <p><strong>Description :</strong> <span th:text="${mission.description}">Mission resume</span></p>
+    <p><strong>Flight Hours :</strong> <span th:text="${mission.flightHours}">0</span> hours</p>
+    <p><strong>Status :</strong> <span th:text="${mission.status}">Mission status</span></p>
+
+    <h3>Participants</h3>
     <table>
         <thead>
             <tr>
-                <th>Pilots</th>
-                <th>Ships</th>
+                <th>Pilote</th>
+                <th>Vaisseau</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Boucle Thymeleaf pour les pilotes -->
-            <td>
-                <ul>
-                    <li th:each="pilotes : ${Pilotes}">
-                        <a th:href="@{/pilotes/details(id=${pilotes.id})}" 
-                           th:text="${pilotes.name}">Pilotes</a>
-                    </li>
-                </ul>
-            </td>
-            <!-- Boucle Thymeleaf pour les vaisseaux -->
-            <td>
-                <ul>
-                    <li th:each="ships : ${Ships}">
-                        <a th:href="@{/ships/details(id=${ships.id})}" 
-                           th:text="${ships.name}">Ships</a>
-                    </li>
-                </ul>
-            </td>
+            <tr th:each="activity : ${mission.activities}">
+                <td>
+                    <a th:href="@{/pilots/{id}(id=${activity.pilot.id})}"
+                       th:text="${activity.pilot.name}">Nom du pilote</a>
+                </td>
+                <td>
+                    <a th:href="@{/ships/{id}(id=${activity.ship.id})}"
+                       th:text="${activity.ship.name}">Nom du vaisseau</a>
+                </td>
+            </tr>
         </tbody>
     </table>
+
+    <a href="/missions">Retour à la liste des missions</a>
 </body>
 </html>

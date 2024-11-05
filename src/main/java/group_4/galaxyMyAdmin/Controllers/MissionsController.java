@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
+import group_4.galaxyMyAdmin.Models.Activity;
 import group_4.galaxyMyAdmin.Models.Mission;
+import group_4.galaxyMyAdmin.Models.Ship;
 import group_4.galaxyMyAdmin.Services.MissionServiceImpl;
 
 import java.util.ArrayList;
@@ -44,4 +47,23 @@ public class MissionsController {
 
         return "missions"; // Renvoie à la vue `missions.html`
     }
+
+    @GetMapping("/missions/{id}")
+    public String getMissionDetails(@PathVariable Long id, Model model) {
+        // Récupère la mission par son ID
+        Mission mission = missionService.findById(id);
+        
+        // Ajoute la mission au modèle
+        model.addAttribute("mission", mission);
+        
+        // Récupère les activités associées pour obtenir les pilotes et vaisseaux
+        List<Activity> activities = mission.getActivities().stream().collect(Collectors.toList());
+
+        // Ajoute les activités au modèle pour l'affichage dans la vue
+        model.addAttribute("activities", activities);
+
+        // Retourner la vue des détails de la mission
+        return "mission-details";
 }
+}
+

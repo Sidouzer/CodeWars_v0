@@ -52,31 +52,27 @@
         </thead>
         <tbody>
             <tr>
-                <!-- Boucle Thymeleaf pour les missions "On-going" -->
                 <td>
+                    <!-- Liste des missions en cours -->
                     <ul>
-                        <li th:each="missions : ${ongoingMissions}">
-                            <a th:href="@{/missions/details(id=${missions.id})}" 
-                               th:text="${missions.description}">Missions</a>
+                        <li th:each="mission : ${ongoingMissions}">
+                            <a th:href="@{/missions/{id}(id=${mission.id})}" th:text="${mission.name}">Mission Name</a>
                         </li>
                     </ul>
                 </td>
-
-                <!-- Boucle Thymeleaf pour les missions "Succeded" -->
                 <td>
+                    <!-- Liste des missions réussies -->
                     <ul>
-                        <li th:each="missions : ${succededMissions}">
-                            <a th:href="@{/missions/details(id=${mission.id})}" 
-                               th:text="${missions.description}">Missions</a>
+                        <li th:each="mission : ${succededMissions}">
+                            <a th:href="@{/missions/{id}(id=${mission.id})}" th:text="${mission.name}">Mission Name</a>
                         </li>
                     </ul>
                 </td>
-                <!-- Boucle Thymeleaf pour les missions "Failure" -->
                 <td>
+                    <!-- Liste des missions ratées -->
                     <ul>
-                        <li th:each="missions : ${failureMissions}">
-                            <a th:href="@{/missions/details(id=${missions.id})}" 
-                               th:text="${missions.description}">Missions</a>
+                        <li th:each="mission : ${failureMissions}">
+                            <a th:href="@{/missions/{id}(id=${mission.id})}" th:text="${mission.name}">Mission Name</a>
                         </li>
                     </ul>
                 </td>
