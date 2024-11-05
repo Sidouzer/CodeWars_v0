@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Missions Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+
+        td a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        td a:hover {
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>On-going</th>
+                <th>Succeded</th>
+                <th>Failure</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <!-- Liste des missions en cours -->
+                    <ul>
+                        <li th:each="mission : ${ongoingMissions}">
+                            <a th:href="@{/missions/{id}(id=${mission.id})}" th:text="${mission.name}">Mission Name</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <!-- Liste des missions réussies -->
+                    <ul>
+                        <li th:each="mission : ${succededMissions}">
+                            <a th:href="@{/missions/{id}(id=${mission.id})}" th:text="${mission.name}">Mission Name</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <!-- Liste des missions ratées -->
+                    <ul>
+                        <li th:each="mission : ${failureMissions}">
+                            <a th:href="@{/missions/{id}(id=${mission.id})}" th:text="${mission.name}">Mission Name</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
