@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
-@Entity
+@Entity(name = "activities")
 public class Activity implements Serializable{
 
     @Id
@@ -16,7 +16,7 @@ public class Activity implements Serializable{
     Long id;
 
     @ManyToOne
-    Pilote pilote;
+    Pilot pilot;
 
     @ManyToOne
     Mission mission;
@@ -35,12 +35,12 @@ public class Activity implements Serializable{
         this.id = id;
     }
 
-    public Pilote getPilote() {
-        return pilote;
+    public Pilot getPilot() {
+        return pilot;
     }
 
-    public void setPilote(Pilote pilote) {
-        this.pilote = pilote;
+    public void setPilot(Pilot pilot) {
+        this.pilot = pilot;
     }
 
     public Mission getMission() {

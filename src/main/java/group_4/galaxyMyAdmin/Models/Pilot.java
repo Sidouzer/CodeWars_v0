@@ -14,8 +14,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@Entity
-public class Pilote implements Serializable{
+@Entity(name = "pilots")
+public class Pilot implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,10 +35,10 @@ public class Pilote implements Serializable{
 
     PiloteRank rank;
 
-    @OneToMany(mappedBy = "pilote", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
     Set<Activity> activities;
 
-    public Pilote() {
+    public Pilot() {
     }
 
     public Long getId() {

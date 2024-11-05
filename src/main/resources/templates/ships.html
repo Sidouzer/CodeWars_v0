@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ships</title>
+</head>
+<body>
+
+    <div th:replace="header :: header"></div>
+
+    <main>
+        <div>
+            <p>Select specific status: </p>
+            <div>
+                <label for="Operational">Operational</label>
+                <input type="checkbox" value="Operational">
+                <label for="Maintenance">Injured</label>
+                <input type="checkbox" value="Maintenance">
+                <label for="Destroyed">Deceased</label>
+                <input type="checkbox" value="Destroyed">
+            </div>
+        </div>
+        <div>
+            <table>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Status</th>
+                    <th>Model</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="ship: ${ships}">
+                    <td th:text="${ship.id}"></td>
+                    <td th:text="${ship.model}"></td>
+                    <td th:text="${ship.status}"></td>
+                    <td><a href="/ship(id=${ship.id})"></a></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </main>
+</body>
+</html>

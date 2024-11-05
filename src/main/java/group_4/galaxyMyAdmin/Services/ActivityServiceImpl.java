@@ -26,8 +26,7 @@ public class ActivityServiceImpl implements Service<Activity>{
 
     @Override
     public void save(Activity obj) {
-        // TODO Auto-generated method stub
-        
+        // TODO Auto-generated method stub      
     }
 
 }

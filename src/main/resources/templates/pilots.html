@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pilots</title>
+</head>
+<body>
+
+    <div th:replace="header :: header"></div>
+
+    <main>
+        <div><input type="search">Search by name</div>
+        <div>
+            <p>Select specific status</p>
+            <div>
+                <label for="Operational">Operational</label>
+                <input type="checkbox" value="Operational">
+                <label for="Injured">Injured</label>
+                <input type="checkbox" value="Injured">
+                <label for="Deceased">Deceased</label>
+                <input type="checkbox" value="Deceased">
+            </div>
+        </div>
+        <div>
+            <table>
+                <thead>
+                  <tr>
+                    <th>Firstname</th>
+                    <th>Surname</th>
+                    <th>Rank</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="pilot: ${pilots}">
+                    <td th:text="${pilot.id}"></td>
+                    <td th:text="${pilot.firstname}"></td>
+                    <td th:text="${pilot.surname}"></td>
+                    <td th:text="${pilot.rank}"></td>
+                    <td th:text="${pilot.status}"></td>
+                    <td><a href="/pilot(id=${pilot.id})"></a></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </main>
+</body>
+</html>
