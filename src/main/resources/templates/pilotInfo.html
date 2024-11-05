@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Pilot Info</title>
+</head>
+
+<body>
+
+    <div th:replace="~{header :: header}"></div>
+
+    <main>
+        <section>
+            <h2>Personnal Informations</h2>
+            <div>
+                <p th:text="'Registration number : ' + ${pilot.id}"></p>
+                <p th:text="'Firstname : ' + ${pilot.firstname}"></p>
+                <p th:text="'Lastname : ' + ${pilot.lastname}"></p>
+                <p th:text="'Race : ' + ${pilot.race}"></p>
+                <p th:text="'Registration date : ' + ${pilot.registrationDate}"></p>
+                <p th:text="'Age when registered : ' + ${pilot.registrationAge}"></p>
+                <p th:text="'Rank : ' + ${pilot.rank}"></p>
+                <p th:text="'Flighthours : ' + ${pilot.flightHours}"></p>
+                <p th:text="'Status : ' + ${pilot.status}"></p>
+            </div>
+        </section>
+        <div>
+            <h2>Missions</h2>
+            <th:block th:if="${pilotMissions != null}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr th:each="mission : ${pilotMissions}">
+                            <td th:text="${mission.title}"></td>
+                            <td th:text="${mission.status}"></td>
+                            <td><a href="@{/mission(id=${mission.id})}">Details</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </th:block>
+            <th:block th:unless="${pilotMissions != null}">
+                <p th:text="${noMissions}"></p>
+            </th:block>
+        </div>
+    </main>
+</body>
+
+</html>
