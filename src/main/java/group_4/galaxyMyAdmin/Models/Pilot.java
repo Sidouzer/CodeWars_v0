@@ -35,11 +35,28 @@ public class Pilot implements Serializable{
 
     PiloteRank rank;
 
+    int flightHours;
+
     @OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
     Set<Activity> activities;
 
     public Pilot() {
     }
+
+    
+
+    public Pilot(String firstname, String lastname, Race race, LocalDate registrationDate, int registrationAge,
+            PiloteStatus status, PiloteRank rank) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.race = race;
+        this.registrationDate = registrationDate;
+        this.registrationAge = registrationAge;
+        this.status = status;
+        this.rank = rank;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -111,6 +128,18 @@ public class Pilot implements Serializable{
 
     public void setActivities(Set<Activity> activities) {
         this.activities = activities;
+    }
+
+
+
+    public int getFlightHours() {
+        return flightHours;
+    }
+
+
+
+    public void setFlightHours(int flightHours) {
+        this.flightHours = flightHours;
     }
 
     
