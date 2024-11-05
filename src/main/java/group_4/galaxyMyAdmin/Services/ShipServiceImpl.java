@@ -1,8 +1,13 @@
 package group_4.galaxyMyAdmin.Services;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import group_4.galaxyMyAdmin.Models.Ship;
 import group_4.galaxyMyAdmin.Repositories.ShipRepository;
@@ -14,19 +19,23 @@ public class ShipServiceImpl implements Service<Ship>{
 
     @Override
     public Collection<Ship> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+        return StreamSupport.stream(shipRepo.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
     @Override
     public Ship findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            return shipRepo.findById(id).get();
+        } catch (IllegalArgumentException | NoSuchElementException ex) {
+            return null;
+        }
+                
     }
 
     @Override
     public void save(Ship obj) {
-        // TODO Auto-generated method stub
+        shipRepo.save(obj);
+       
         
     }
 

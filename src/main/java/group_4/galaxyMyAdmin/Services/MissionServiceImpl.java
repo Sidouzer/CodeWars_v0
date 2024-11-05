@@ -14,7 +14,6 @@ public class MissionServiceImpl implements Service<Mission>{
 
     @Override
     public Collection<Mission> findAll() {
-        // TODO Auto-generated method stub
         return null;
     }
 
