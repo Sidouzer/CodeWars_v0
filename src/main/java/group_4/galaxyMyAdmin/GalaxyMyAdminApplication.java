@@ -33,7 +33,7 @@ public class GalaxyMyAdminApplication implements CommandLineRunner{
 	}
 
 	@Bean
-	public PilotServiceImpl piloteService(){
+	public PilotServiceImpl pilotService(){
 		return new PilotServiceImpl();
 	}
 

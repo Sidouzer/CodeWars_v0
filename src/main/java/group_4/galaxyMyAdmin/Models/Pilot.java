@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-import group_4.galaxyMyAdmin.Enumerations.PiloteRank;
-import group_4.galaxyMyAdmin.Enumerations.PiloteStatus;
+import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
+import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
+import group_4.galaxyMyAdmin.Enumerations.PilotRank;
 import group_4.galaxyMyAdmin.Enumerations.Race;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -31,9 +32,9 @@ public class Pilot implements Serializable{
 
     int registrationAge;
 
-    PiloteStatus status;
+    PilotStatus status;
 
-    PiloteRank rank;
+    PilotRank rank;
 
     int flightHours;
 
@@ -46,7 +47,7 @@ public class Pilot implements Serializable{
     
 
     public Pilot(String firstname, String lastname, Race race, LocalDate registrationDate, int registrationAge,
-            PiloteStatus status, PiloteRank rank) {
+            PilotStatus status, PilotRank rank) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.race = race;
@@ -106,19 +107,19 @@ public class Pilot implements Serializable{
         this.registrationAge = registrationAge;
     }
 
-    public PiloteStatus getStatus() {
+    public PilotStatus getStatus() {
         return status;
     }
 
-    public void setStatus(PiloteStatus status) {
+    public void setStatus(PilotStatus status) {
         this.status = status;
     }
 
-    public PiloteRank getRank() {
+    public PilotRank getRank() {
         return rank;
     }
 
-    public void setRank(PiloteRank rank) {
+    public void setRank(PilotRank rank) {
         this.rank = rank;
     }
 
@@ -142,5 +143,13 @@ public class Pilot implements Serializable{
         this.flightHours = flightHours;
     }
 
+    public boolean isAvailable() {
+        for(Activity activity : this.activities) {
+            if(activity.getMission().status == MissionStatus._ONGOING) {
+                return false;
+            }
+        }
+        return true;
+    }
     
 }

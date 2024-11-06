@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import group_4.galaxyMyAdmin.Enumerations.PiloteRank;
-import group_4.galaxyMyAdmin.Enumerations.PiloteStatus;
+import group_4.galaxyMyAdmin.Enumerations.PilotRank;
+import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Enumerations.Race;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
@@ -32,7 +32,7 @@ import group_4.galaxyMyAdmin.Tools.PilotUpdater;
 public class PilotsController {
 
     @Autowired
-    PilotServiceImpl piloteService;
+    PilotServiceImpl pilotService;
 
     @Autowired
     PilotCreationValidator pilotValidator;
@@ -42,16 +42,16 @@ public class PilotsController {
 
     @GetMapping("")
     public String getPilotsList(@RequestParam(value = "status", required = false) List<String> status, Model model) {
-        List<Pilot> pilots = piloteService.findAll().stream().collect(Collectors.toList());
+        List<Pilot> pilots = pilotService.findAll().stream().collect(Collectors.toList());
         List<Pilot> filteredPilots = (status == null || status.isEmpty()) ? pilots : 
             pilots.stream().filter(pilot -> status.contains(pilot.getStatus().toString()))
             .collect(Collectors.toList());
             
-        Pilot pilotTest = new Pilot("test", "testLastName", Race._HUMAN, LocalDate.now(), 10, PiloteStatus._OPE, PiloteRank._CAPTAIN);
-		piloteService.save(pilotTest);
+        Pilot pilotTest = new Pilot("test", "testLastName", Race._HUMAN, LocalDate.now(), 10, PilotStatus._OPE, PilotRank._CAPTAIN);
+		pilotService.save(pilotTest);
 
-        Pilot pilotTest2 = new Pilot("ploup", "testLastName", Race._HUMAN, LocalDate.now(), 10, PiloteStatus._OPE, PiloteRank._CAPTAIN);
-		piloteService.save(pilotTest2);
+        Pilot pilotTest2 = new Pilot("ploup", "testLastName", Race._HUMAN, LocalDate.now(), 10, PilotStatus._OPE, PilotRank._CAPTAIN);
+		pilotService.save(pilotTest2);
 
         model.addAttribute("filteredPilots", filteredPilots);
         
@@ -60,7 +60,7 @@ public class PilotsController {
     
     @GetMapping("/{id}")
     public String getMethodName(@PathVariable Long id, Model model) {
-        Pilot pilot = piloteService.findById(id);
+        Pilot pilot = pilotService.findById(id);
         model.addAttribute("pilot", pilot);
         List<Mission> missions = new ArrayList<>();
         try {
@@ -90,7 +90,7 @@ public class PilotsController {
             return "pilotCreation";
         }
         pilotUpdater.initialize(pilot);
-        piloteService.save(pilot);
+        pilotService.save(pilot);
         return "redirect:/pilots/" + pilot.getId();
     }
     
