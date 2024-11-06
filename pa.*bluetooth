@@ -5,7 +5,7 @@
 [31m|[m [32m|[m 
 [31m|[m [32m|[m     Merge branch 'Robinson' into 'main'
 [31m|[m [32m|[m     
-[31m|[m [32m|[m     PiloteController/getMissionsList
+[31m|[m [32m|[m     PilotController/getMissionsList
 [31m|[m [32m|[m     
 [31m|[m [32m|[m     See merge request 2024-1-cda-avril-2024/galaxiemyadmin!5
 [31m|[m [32m|[m 
@@ -13,7 +13,7 @@
 [31m|[m [32m|[m Author: Robinson <robinson.lhuillier@gmail.com>
 [31m|[m [32m|[m Date:   Tue Nov 5 17:50:48 2024 +0100
 [31m|[m [32m|[m 
-[31m|[m [32m|[m     PiloteController/getMissionsList
+[31m|[m [32m|[m     PilotController/getMissionsList
 [31m|[m [32m|[m   
 * [32m|[m   [33mcommit 200b644d8143926b160f0192cfbd4ad0c6a1015d[m
 [33m|[m[34m\[m [32m\[m  Merge: 9e776c2 1c0a7fe
@@ -65,7 +65,7 @@
 [1;35m|[m [32m|[m [1;33m|[m [35m|[m   
 [1;35m|[m [32m|[m [1;33m|[m [35m|[m       Merge branch 'Robinson' into 'main'
 [1;35m|[m [32m|[m [1;33m|[m [35m|[m       
-[1;35m|[m [32m|[m [1;33m|[m [35m|[m       /pilote + /pilote/id (missionsList untested)
+[1;35m|[m [32m|[m [1;33m|[m [35m|[m       /pilot + /pilot/id (missionsList untested)
 [1;35m|[m [32m|[m [1;33m|[m [35m|[m       
 [1;35m|[m [32m|[m [1;33m|[m [35m|[m       See merge request 2024-1-cda-avril-2024/galaxiemyadmin!2
 [1;35m|[m [32m|[m [1;33m|[m [35m|[m 
@@ -73,7 +73,7 @@
 [1;35m|[m [1;36m|[m [1;33m|[m [35m|[m Author: Robinson <robinson.lhuillier@gmail.com>
 [1;35m|[m [1;36m|[m [1;33m|[m [35m|[m Date:   Tue Nov 5 17:12:18 2024 +0100
 [1;35m|[m [1;36m|[m [1;33m|[m [35m|[m 
-[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m     /pilote + /pilote/id (missionsList untested)
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m     /pilot + /pilot/id (missionsList untested)
 [1;35m|[m [1;36m|[m [1;33m|[m [35m|[m 
 * [1;36m|[m [1;33m|[m [35m|[m [33mcommit cb0ea93cde8e67fa3409e0711954c13f7bbfe306[m
 [31m|[m[1;36m\[m[1;36m|[m [1;33m|[m [35m|[m Merge: 4bace49 f354d6f
@@ -121,7 +121,7 @@
 [31m|[m [34m|[m Author: Robinson <robinson.lhuillier@gmail.com>
 [31m|[m [34m|[m Date:   Tue Nov 5 10:52:04 2024 +0100
 [31m|[m [34m|[m 
-[31m|[m [34m|[m     Pilote -> Pilot + Pilots(controller + vue)
+[31m|[m [34m|[m     Pilot -> Pilot + Pilots(controller + vue)
 [31m|[m [34m|[m 
 * [34m|[m [33mcommit 4bace4998426bf6a8e1c2118603d349baf38297f[m
 [34m|[m [34m|[m Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>

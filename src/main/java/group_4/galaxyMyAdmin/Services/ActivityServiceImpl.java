@@ -2,6 +2,9 @@ package group_4.galaxyMyAdmin.Services;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,19 +18,22 @@ public class ActivityServiceImpl implements Service<Activity>{
 
     @Override
     public Collection<Activity> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+        return StreamSupport.stream(actRepo.findAll().spliterator(), false)
+            .collect(Collectors.toList());
     }
 
     @Override
     public Activity findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            return actRepo.findById(id).get();
+        } catch (IllegalArgumentException | NoSuchElementException ex) {
+            return null;
+        }
     }
 
     @Override
     public void save(Activity obj) {
-        // TODO Auto-generated method stub      
+        actRepo.save(obj);      
     }
 
     public List<Activity> findByPilot_id(Long id) {

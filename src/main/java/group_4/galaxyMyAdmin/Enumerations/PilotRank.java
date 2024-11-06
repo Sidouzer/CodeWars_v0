@@ -1,6 +1,6 @@
 package group_4.galaxyMyAdmin.Enumerations;
 
-public enum PiloteRank {
+public enum PilotRank {
     _APPRENTICE("Apprentice"),
     _FLIGHT_OFFICER("Flight Officer"),
     _LIEUTENANT("Lieutenant"),
@@ -12,7 +12,7 @@ public enum PiloteRank {
 
     String value;
 
-    private PiloteRank(String value) {
+    private PilotRank(String value) {
         this.value = value;
     }
 

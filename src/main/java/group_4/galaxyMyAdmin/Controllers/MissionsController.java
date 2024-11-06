@@ -71,7 +71,7 @@ public class MissionsController {
         // Ajoute la mission au modèle
         model.addAttribute("mission", mission);
         
-        // Récupère les activités associées pour obtenir les pilotes et vaisseaux
+        // Récupère les activités associées pour obtenir les pilots et vaisseaux
         List<Activity> activities = mission.getActivities().stream().collect(Collectors.toList());
 
         // Ajoute les activités au modèle pour l'affichage dans la vue

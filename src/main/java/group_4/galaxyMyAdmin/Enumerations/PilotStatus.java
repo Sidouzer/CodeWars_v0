@@ -1,13 +1,13 @@
 package group_4.galaxyMyAdmin.Enumerations;
 
-public enum PiloteStatus {
+public enum PilotStatus {
     _OPE("Operational"),
     _INJ("Injured"),
     _DEC("Deceased");
 
     String value;
 
-    private PiloteStatus(String value) {
+    private PilotStatus(String value) {
         this.value = value;
     }
 
