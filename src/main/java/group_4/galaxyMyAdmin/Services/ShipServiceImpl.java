@@ -38,7 +38,7 @@ public class ShipServiceImpl implements Service<Ship>{
         shipRepo.save(obj);
     }
 
-    List<Ship> findByStatus(ShipStatus status){
+    public List<Ship> findByStatus(ShipStatus status){
         return StreamSupport.stream(shipRepo.findByStatus(status).spliterator(), false)
         .collect(Collectors.toList());
     } 
