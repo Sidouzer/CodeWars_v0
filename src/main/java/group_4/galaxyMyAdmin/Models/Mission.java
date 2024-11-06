@@ -95,5 +95,15 @@ public class Mission implements Serializable{
         this.title = title;
     }
 
+    public void setPilot(Pilot pilot) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPilot'");
+    }
+
+    public void setShip(Ship ship) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setShip'");
+    }
+
     
 }
