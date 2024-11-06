@@ -7,8 +7,6 @@ import org.springframework.validation.Validator;
 
 import group_4.galaxyMyAdmin.Models.Pilot;
 
-
-
 @Component
 public class PilotCreationValidator implements Validator {
 

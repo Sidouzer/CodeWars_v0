@@ -3,6 +3,7 @@ package group_4.galaxyMyAdmin.Models;
 import java.io.Serializable;
 import java.util.Set;
 
+import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
 import group_4.galaxyMyAdmin.Enumerations.ShipStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -59,5 +60,12 @@ public class Ship implements Serializable{
         this.activities = activities;
     }
 
-    
+     public boolean isAvailable() {
+        for(Activity activity : this.activities) {
+            if(activity.getMission().status == MissionStatus._ONGOING) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

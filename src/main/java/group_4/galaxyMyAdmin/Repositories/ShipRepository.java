@@ -10,5 +10,5 @@ import group_4.galaxyMyAdmin.Models.Ship;
 
 @RepositoryRestResource(collectionResourceRel = "ship")
 public interface ShipRepository extends CrudRepository <Ship, Long>{
-    List<Ship> findByStatus(ShipStatus status);
+    List<Ship> findByStatus(ShipStatus ope);
 }
