@@ -1,7 +1,7 @@
 package group_4.galaxyMyAdmin.Enumerations;
 
 public enum PiloteRank {
-    _APPRENTICE("Apprentisse"),
+    _APPRENTICE("Apprentice"),
     _FLIGHT_OFFICER("Flight Officer"),
     _LIEUTENANT("Lieutenant"),
     _CAPTAIN("Captain"),
