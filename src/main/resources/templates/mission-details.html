@@ -50,7 +50,7 @@
     <table>
         <thead>
             <tr>
-                <th>Pilote</th>
+                <th>Pilot</th>
                 <th>Vaisseau</th>
             </tr>
         </thead>
@@ -58,7 +58,7 @@
             <tr th:each="activity : ${mission.activities}">
                 <td>
                     <a th:href="@{/pilots/{id}(id=${activity.pilot.id})}"
-                       th:text="${activity.pilot.name}">Nom du pilote</a>
+                       th:text="${activity.pilot.name}">Nom du pilot</a>
                 </td>
                 <td>
                     <a th:href="@{/ships/{id}(id=${activity.ship.id})}"
