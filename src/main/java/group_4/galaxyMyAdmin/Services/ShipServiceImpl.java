@@ -9,6 +9,7 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Enumerations.ShipStatus;
 import group_4.galaxyMyAdmin.Models.Ship;
 import group_4.galaxyMyAdmin.Repositories.ShipRepository;
@@ -38,8 +39,8 @@ public class ShipServiceImpl implements Service<Ship>{
         shipRepo.save(obj);
     }
 
-    List<Ship> findByStatus(ShipStatus status){
-        return StreamSupport.stream(shipRepo.findByStatus(status).spliterator(), false)
+    public List<Ship> findByStatus(ShipStatus ope){
+        return StreamSupport.stream(shipRepo.findByStatus(ope).spliterator(), false)
         .collect(Collectors.toList());
     } 
     

@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
-import group_4.galaxyMyAdmin.Enumerations.PiloteStatus;
+import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
+import group_4.galaxyMyAdmin.Enumerations.ShipStatus;
 import group_4.galaxyMyAdmin.Models.Activity;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
@@ -87,7 +88,7 @@ public class MissionsController {
         model.addAttribute("mission", new Mission());
             
         // Récupère les pilotes opérationnels
-        List<Pilot> operationalPilots = pilotService.findByStatus(PilotStatus._OPE);
+        List<Pilot> operationalPilots = (List<Pilot>) pilotService.findByStatus(PilotStatus._OPE);
 _
         // Filtre pour ne garder que ceux qui sont disponibles
         List<Pilot> availableOperationalPilots = operationalPilots.stream()
@@ -95,11 +96,11 @@ _
             .collect(Collectors.toList());
 
         // Récupère les vaisseaux opérationnels
-        List<Ship> operationalShips = shipService.findByStatus(PilotStatus._OPE);
+        List<Ship> operationalShips = shipService.findByStatus(ShipStatus._OPE);
 
         // Filtre pour ne garder que les vaisseaux disponibles
         List<Ship> availableOperationalShips = operationalShips.stream()
-            .filter(Ship::isAvailable)  
+            .filter(Ship::isAvailable)
             .collect(Collectors.toList());
 
         // Ajoute les pilotes et vaisseaux filtrés au modèle
