@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
+import group_4.galaxyMyAdmin.Enumerations.PiloteStatus;
 import group_4.galaxyMyAdmin.Models.Activity;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
@@ -22,11 +23,7 @@ import group_4.galaxyMyAdmin.Models.Vehicule;
 import group_4.galaxyMyAdmin.Services.MissionServiceImpl;
 import group_4.galaxyMyAdmin.Services.PilotServiceImpl;
 import group_4.galaxyMyAdmin.Services.ShipServiceImpl;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 public class MissionsController {
@@ -40,50 +37,6 @@ public class MissionsController {
     @Autowired
     private ShipServiceImpl shipService;
 
-/*     @GetMapping("/missions/create-test")
-    public String createTestMission() {
-        // Créer une mission d'exemple
-        Mission mission = new Mission();
-        mission.setTitle("Opération Alpha");
-        mission.setDescription("Mission d'infiltration secrète dans le territoire ennemi.");
-        mission.setFlightHours(5);
-        mission.setStatus(MissionStatus._ONGOING);
-
-        // Créer des pilotes et vaisseaux d'exemple
-        Pilot pilot1 = new Pilot();
-        pilot1.setFirstname("Luke");
-        pilot1.setLastname("Skywalker");
-        
-        Pilot pilot2 = new Pilot();
-        pilot1.setFirstname("Han");
-        pilot1.setLastname("Solo");
-        
-        Ship ship1 = new Ship();
-        ship1.setId((long) 11223344);
-
-        Ship ship2 = new Ship();
-        ship2.setId((long)99999);
-
-        // Associe les pilotes et les vaisseaux à la mission via des activités
-        Activity activity1 = new Activity();
-        activity1.setMission(mission);
-        activity1.setPilot(pilot1);
-        activity1.setShip(ship1);
-
-        Activity activity2 = new Activity();
-        activity2.setMission(mission);
-        activity2.setPilot(pilot2);
-        activity2.setShip(ship2);
-
-        // Ajouter les activités à la mission
-        mission.setActivities(Set.of(activity1, activity2));
-
-        // Sauvegarde la mission
-        missionService.save(mission);
-
-        return "redirect:/missions"; // Redirige vers la liste des missions pour vérifier l'ajout
-}
- */
     @GetMapping("/missions")
     public String getMissions(Model model) {
         // Récupère toutes les missions
@@ -128,21 +81,33 @@ public class MissionsController {
         return "mission-details";
 }
 
-    // Affiche le formulaire de création de mission
+        // Affiche le formulaire de création de mission
     @GetMapping("/missions/new")
     public String showMissionForm(Model model) {
         model.addAttribute("mission", new Mission());
-        
-        // Récupère la liste des pilotes opérationnels et libres
-        List<Pilot> operationalPilots = pilotService.findOperationalAndFreePilots();
-        model.addAttribute("operationalPilots", operationalPilots);
+            
+        // Récupère les pilotes opérationnels
+        List<Pilot> operationalPilots = pilotService.findByStatus(PilotStatus._OPE);
+_
+        // Filtre pour ne garder que ceux qui sont disponibles
+        List<Pilot> availableOperationalPilots = operationalPilots.stream()
+            .filter(Pilot::isAvailable) 
+            .collect(Collectors.toList());
 
-        // Récupère la liste des vaisseaux opérationnels
-        List<Ship> operationalShips = shipService.findOperationalShips();
-        model.addAttribute("operationalShips", operationalShips);
+        // Récupère les vaisseaux opérationnels
+        List<Ship> operationalShips = shipService.findByStatus(PilotStatus._OPE);
+
+        // Filtre pour ne garder que les vaisseaux disponibles
+        List<Ship> availableOperationalShips = operationalShips.stream()
+            .filter(Ship::isAvailable)  
+            .collect(Collectors.toList());
+
+        // Ajoute les pilotes et vaisseaux filtrés au modèle
+        model.addAttribute("operationalPilots", availableOperationalPilots);
+        model.addAttribute("operationalShips", availableOperationalShips);
 
         return "mission-form";
-    }
+        }
 
     // Gère la soumission du formulaire de création de mission
     @PostMapping("/missions/new")
