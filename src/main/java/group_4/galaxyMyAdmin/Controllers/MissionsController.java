@@ -20,11 +20,9 @@ import group_4.galaxyMyAdmin.Models.Activity;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
 import group_4.galaxyMyAdmin.Models.Ship;
-import group_4.galaxyMyAdmin.Models.Vehicule;
 import group_4.galaxyMyAdmin.Services.MissionServiceImpl;
 import group_4.galaxyMyAdmin.Services.PilotServiceImpl;
 import group_4.galaxyMyAdmin.Services.ShipServiceImpl;
-import java.util.Set;
 
 @Controller
 public class MissionsController {
@@ -89,7 +87,7 @@ public class MissionsController {
             
         // Récupère les pilotes opérationnels
         List<Pilot> operationalPilots = (List<Pilot>) pilotService.findByStatus(PilotStatus._OPE);
-_
+
         // Filtre pour ne garder que ceux qui sont disponibles
         List<Pilot> availableOperationalPilots = operationalPilots.stream()
             .filter(Pilot::isAvailable) 
