@@ -8,8 +8,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,6 +22,9 @@ import group_4.galaxyMyAdmin.Enumerations.Race;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
 import group_4.galaxyMyAdmin.Services.PilotServiceImpl;
+import group_4.galaxyMyAdmin.Tools.PilotCreationValidator;
+import group_4.galaxyMyAdmin.Tools.PilotUpdater;
+
 
 
 @Controller
@@ -27,6 +33,12 @@ public class PilotsController {
 
     @Autowired
     PilotServiceImpl piloteService;
+
+    @Autowired
+    PilotCreationValidator pilotValidator;
+
+    @Autowired
+    PilotUpdater pilotUpdater;
 
     @GetMapping("")
     public String getPilotsList(@RequestParam(value = "status", required = false) List<String> status, Model model) {
@@ -62,6 +74,26 @@ public class PilotsController {
         }
         return "pilotInfo";
     }
+
+    @GetMapping("/create")
+    public String getMethodName(Model model) {
+        model.addAttribute("pilot", new Pilot());
+        model.addAttribute("pilotRaces", Race.values());
+        return "pilotCreation";
+    }
+    
+    @PostMapping("/create")
+    public String createPilot(@ModelAttribute Pilot pilot,BindingResult result, Model model) {
+        pilotValidator.validate(pilot, result);
+        if (result.hasErrors()) {
+            model.addAttribute("pilotRaces", Race.values());
+            return "pilotCreation";
+        }
+        pilotUpdater.initialize(pilot);
+        piloteService.save(pilot);
+        return "redirect:/pilots/" + pilot.getId();
+    }
+    
     
 
 }
