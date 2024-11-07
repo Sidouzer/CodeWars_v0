@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <div th:replace="~{header :: header}"></div>
+
+    <main>
+        <section>
+            <div class="info-box">
+                <p th:text="'Id: ' + ${ship.id}"></p>
+                <p th:text="'Status: ' + ${ship.status}"></p>
+                <p th:text="'Model: ' + ${ship.model}"></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

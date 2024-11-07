@@ -6,10 +6,8 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Enumerations.ShipStatus;
 import group_4.galaxyMyAdmin.Models.Ship;
 import group_4.galaxyMyAdmin.Repositories.ShipRepository;

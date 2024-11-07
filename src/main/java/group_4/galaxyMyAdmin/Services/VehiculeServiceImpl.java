@@ -34,12 +34,16 @@ public class VehiculeServiceImpl implements Service<Vehicule>{
                 
     }
 
+
+
+
     @Override
     public void save(Vehicule obj) {
-        vehiRepo.save(obj);
+        // TODO Auto-generated method stub
+        
     }
 
-    
+
 
 
 }

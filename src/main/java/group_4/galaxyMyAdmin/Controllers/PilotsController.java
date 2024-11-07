@@ -50,7 +50,7 @@ public class PilotsController {
         Pilot pilotTest = new Pilot("test", "testLastName", Race._HUMAN, LocalDate.now(), 10, PilotStatus._OPE, PilotRank._CAPTAIN);
 		pilotService.save(pilotTest);
 
-        Pilot pilotTest2 = new Pilot("ploup", "testLastName", Race._HUMAN, LocalDate.now(), 10, PilotStatus._OPE, PilotRank._CAPTAIN);
+        Pilot pilotTest2 = new Pilot("ploup", "testLastName", Race._HUMAN, LocalDate.now(), 10, PilotStatus._OPE, PilotRank._APPRENTICE);
 		pilotService.save(pilotTest2);
 
         model.addAttribute("filteredPilots", filteredPilots);
