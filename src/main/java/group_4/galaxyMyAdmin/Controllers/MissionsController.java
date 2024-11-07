@@ -81,7 +81,7 @@ public class MissionsController {
 
         return "mission-details";
     }
-    }
+
 
     // Affiche le formulaire de création de mission
     @GetMapping("/missions/new")
@@ -146,11 +146,6 @@ public class MissionsController {
         return "redirect:/missions";
     }
     
-
-}
-
-        return "redirect:/missions"; // Redirige vers la liste des missions
-    }
 
     @GetMapping("/missions/{id}/close")
     public String getMethodName(@PathVariable Long id, Model model, Mission mission) {
