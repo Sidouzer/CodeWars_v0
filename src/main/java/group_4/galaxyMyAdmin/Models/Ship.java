@@ -25,8 +25,17 @@ public class Ship implements Serializable{
     @OneToOne
     Vehicule model;
 
+    
+
     @OneToMany(mappedBy = "ship", cascade = CascadeType.ALL)
     Set<Activity> activities;
+
+    public Ship(Long id, ShipStatus status, Vehicule model) {
+        this.id = id;
+        this.status = status;
+        this.model = model;
+       
+    }
 
     public Long getId() {
         return id;
@@ -58,6 +67,8 @@ public class Ship implements Serializable{
 
     public void setActivities(Set<Activity> activities) {
         this.activities = activities;
+    }
+    public Ship() {
     }
 
      public boolean isAvailable() {

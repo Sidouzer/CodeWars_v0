@@ -1,6 +1,7 @@
 package group_4.galaxyMyAdmin.Models;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ public class Vehicule implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    Set<Activity> activities;
+
     Long id;
 
     String name;
@@ -21,6 +24,16 @@ public class Vehicule implements Serializable{
     int minCapacity;
 
     int maxCapacity;
+
+     public Vehicule(String name, String type, int minCapacity, int maxCapacity) {
+        this.name = name;
+        this.type = type;
+        this.minCapacity = minCapacity;
+        this.maxCapacity = maxCapacity;
+       
+    }
+    public Vehicule() {
+    }
 
     public Long getId() {
         return id;
@@ -61,6 +74,12 @@ public class Vehicule implements Serializable{
     public void setMaxCapacity(int maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
+
+    public Set<Activity> getActivities() {
+        return activities;
+    }
+
+    
 
     
 }
