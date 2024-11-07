@@ -39,5 +39,4 @@ public class ActivityServiceImpl implements Service<Activity>{
     public List<Activity> findByPilot_id(Long id) {
         return actRepo.findByPilot_id(id);
     }
-
 }
