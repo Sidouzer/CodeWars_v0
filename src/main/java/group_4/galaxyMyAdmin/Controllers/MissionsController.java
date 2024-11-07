@@ -22,6 +22,7 @@ import group_4.galaxyMyAdmin.Models.Activity;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
 import group_4.galaxyMyAdmin.Models.Ship;
+import group_4.galaxyMyAdmin.Services.ActivityServiceImpl;
 import group_4.galaxyMyAdmin.Services.MissionServiceImpl;
 import group_4.galaxyMyAdmin.Services.PilotServiceImpl;
 import group_4.galaxyMyAdmin.Services.ShipServiceImpl;
@@ -37,6 +38,9 @@ public class MissionsController {
 
     @Autowired
     private ShipServiceImpl shipService;
+
+    @Autowired
+    private ActivityServiceImpl activityService;
 
     @GetMapping("/missions")
     public String getMissions(Model model) {
@@ -92,42 +96,47 @@ public class MissionsController {
 
     @PostMapping("/missions/new")
     public String createMission(@Valid @ModelAttribute("mission") Mission mission,
-        BindingResult result,
-        @RequestParam Long pilotId,
-        @RequestParam Long shipId,
-        Model model) {
+                                BindingResult result,
+                                @RequestParam List<Long> pilotIds,
+                                @RequestParam List<Long> shipIds,
+                                Model model) {
         if (result.hasErrors()) {
-        // Recharge les pilotes et vaisseaux opérationnels et disponibles en cas d'erreurs
-        List<Pilot> operationalPilots = pilotService.findByStatus(PilotStatus._OPE).stream()
-            .filter(Pilot::isAvailable)
-            .collect(Collectors.toList());
-        List<Ship> operationalShips = shipService.findByStatus(ShipStatus._OPE).stream()
-            .filter(Ship::isAvailable)
-            .collect(Collectors.toList());
-
-        model.addAttribute("operationalPilots", operationalPilots);
-        model.addAttribute("operationalShips", operationalShips);
-
-        return "mission-form";
+            // Recharge les pilotes et vaisseaux opérationnels et disponibles en cas d'erreurs
+            List<Pilot> operationalPilots = pilotService.findByStatus(PilotStatus._OPE).stream()
+                .filter(Pilot::isAvailable)
+                .collect(Collectors.toList());
+            List<Ship> operationalShips = shipService.findByStatus(ShipStatus._OPE).stream()
+                .filter(Ship::isAvailable)
+                .collect(Collectors.toList());
+    
+            model.addAttribute("operationalPilots", operationalPilots);
+            model.addAttribute("operationalShips", operationalShips);
+    
+            return "mission-form";
+        }
+    
+        // Sauvegarde d'abord la mission pour obtenir un ID
+        missionService.save(mission);
+    
+        // Pour chaque combinaison de pilote et vaisseau, crée une activité et l'enregistre individuellement
+        for (Long pilotId : pilotIds) {
+            Pilot pilot = pilotService.findById(pilotId);
+            for (Long shipId : shipIds) {
+                Ship ship = shipService.findById(shipId);
+                
+                // Crée une nouvelle activité pour chaque combinaison de pilote et vaisseau
+                Activity activity = new Activity();
+                activity.setPilot(pilot);
+                activity.setShip(ship);
+                activity.setMission(mission);  // Associe chaque activité à la mission
+    
+                // Sauvegarde chaque activité individuellement
+                activityService.save(activity);
+            }
+        }
+    
+        return "redirect:/missions";
     }
-
-    // Associe du pilote et du vaisseau avec la mission
-    Pilot pilot = pilotService.findById(pilotId);
-    Ship ship = shipService.findById(shipId);
-
-    // Crée une nouvelle activité associée à la mission, au pilote et au vaisseau
-    Activity activity = new Activity();
-    activity.setPilot(pilot);
-    activity.setShip(ship);
-    activity.setMission(mission);
-
-    // Ajoute l'activité à la collection d'activités de la mission
-    mission.getActivities().add(activity);
-
-    // Sauvegarde la mission (et des activités associées grâce à la cascade)
-    missionService.save(mission);
-
-    return "redirect:/missions";
-}
+    
 
 }
