@@ -8,36 +8,43 @@
     <div th:replace="header :: header"></div>
 
     <main>
+      <form action="/ships" method="get">
         <div>
             <p>Select specific status: </p>
             <div>
                 <label for="Operational">Operational</label>
-                <input type="checkbox" value="Operational">
-                <label for="Maintenance">Injured</label>
-                <input type="checkbox" value="Maintenance">
-                <label for="Destroyed">Deceased</label>
-                <input type="checkbox" value="Destroyed">
+                <input type="checkbox" value="Operational" name="status"
+                  th:checked="${status != null && status.contains('Operational')}">
+                <label for="Maintenance">Maintenance</label>
+                <input type="checkbox" value="Maintenance" name="status"
+                  th:checked="${status != null && status.contains('Maintenance')}">
+                <label for="Destroyed">Destroyed</label>
+                <input type="checkbox" value="Destroyed" name="status"
+                  th:checked="${status != null && status.contains('Destroyed')}">
             </div>
+            <button type="submit">Apply Filters</button>
         </div>
+      </form>
         <div>
             <table>
                 <thead>
                   <tr>
                     <th>Id</th>
-                    <th>Status</th>
                     <th>Model</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr th:each="ship: ${ships}">
                     <td th:text="${ship.id}"></td>
-                    <td th:text="${ship.model}"></td>
+                    <td th:text="${ship.model.name  }"></td>
                     <td th:text="${ship.status}"></td>
-                    <td><a href="/ship(id=${ship.id})"></a></td>
+                    <td><a th:href="@{/ships/{id}(id=${ship.id})}">Details</a></td>
                   </tr>
                 </tbody>
               </table>
         </div>
+       
     </main>
 </body>
 </html>

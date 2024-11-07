@@ -54,7 +54,7 @@ public class PilotsController {
 		pilotService.save(pilotTest2);
 
         model.addAttribute("filteredPilots", filteredPilots);
-        
+        model.addAttribute("status", status);
         return "pilots";
     }
     
