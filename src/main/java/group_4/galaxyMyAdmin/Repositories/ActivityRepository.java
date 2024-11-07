@@ -11,4 +11,8 @@ import group_4.galaxyMyAdmin.Models.Activity;
 public interface ActivityRepository extends CrudRepository <Activity, Long>{
 
     List<Activity> findByPilot_id(Long id);
+
+    List<Activity> findByMission_id(Long id);
+
+    List<Activity> findByShip_id(Long id);
 }

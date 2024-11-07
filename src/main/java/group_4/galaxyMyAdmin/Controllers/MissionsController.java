@@ -1,7 +1,9 @@
 package group_4.galaxyMyAdmin.Controllers;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
@@ -26,6 +28,7 @@ import group_4.galaxyMyAdmin.Services.ActivityServiceImpl;
 import group_4.galaxyMyAdmin.Services.MissionServiceImpl;
 import group_4.galaxyMyAdmin.Services.PilotServiceImpl;
 import group_4.galaxyMyAdmin.Services.ShipServiceImpl;
+
 
 @Controller
 public class MissionsController {
@@ -70,12 +73,17 @@ public class MissionsController {
         Mission mission = missionService.findById(id);
         model.addAttribute("mission", mission);
 
-        List<Activity> activities = new ArrayList<>(mission.getActivities());
+        // Récupère les activités associées pour obtenir les pilots et vaisseaux
+        List<Activity> activities = mission.getActivities().stream().collect(Collectors.toList());
+
+        // Ajoute les activités au modèle pour l'affichage dans la vue
         model.addAttribute("activities", activities);
 
         return "mission-details";
     }
 
+
+    // Affiche le formulaire de création de mission
     @GetMapping("/missions/new")
     public String showMissionForm(Model model) {
         model.addAttribute("mission", new Mission());
@@ -139,4 +147,45 @@ public class MissionsController {
     }
     
 
+    @GetMapping("/missions/{id}/close")
+    public String getMethodName(@PathVariable Long id, Model model, Mission mission) {
+        model.addAttribute("pilotStatuses", PilotStatus.values());
+        model.addAttribute("shipStatuses", ShipStatus.values());
+        mission = missionService.findById(id);
+        List<Pilot> missionPilots = new ArrayList<>();
+        List<Ship> missionShips = new ArrayList<>();
+        try {
+            mission.getActivities().forEach(activity -> {
+                missionPilots.add(activity.getPilot());
+                missionShips.add(activity.getShip());
+            });
+        } catch (NullPointerException | UnsupportedOperationException | 
+            IllegalArgumentException ex) {
+        model.addAttribute("error", "Something went wrong, please refresh page");
+        }
+        model.addAttribute("missionPilots", missionPilots);
+        model.addAttribute("missionShips", missionShips);
+        return "missionClose";
+    }
+
+    @PostMapping("/missions/{id}/close")
+    public String postMethodName(@PathVariable Long id, @RequestParam Map<Long, ShipStatus> shipStatuses, 
+        @RequestParam Map<Long,PilotStatus> pilotStatuses, @ModelAttribute Mission mission) {
+            try{
+        pilotStatuses.forEach((Long idPilote, PilotStatus status) -> {
+            Pilot pilot = pilotService.findById(idPilote);
+            pilot.setStatus(status);
+            pilotService.save(pilot);
+        });
+        shipStatuses.forEach((Long idShip, ShipStatus status) -> {
+            Ship ship = shipService.findById(idShip);
+            ship.setStatus(status);
+            shipService.save(ship);
+        });
+        missionService.save(mission);
+        } catch (NullPointerException | ConcurrentModificationException ex) {
+            return "redirect:/missions/{id}/close";
+        }               
+        return "redirect:/missions/{id}";
+    }
 }
