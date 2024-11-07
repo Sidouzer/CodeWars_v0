@@ -16,7 +16,32 @@ body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
 }
+table {
+    border-collapse: collapse;
+    width: 60%;
+    background-color: rgb(43, 37, 37);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
+th, td {
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #383838;
+    font-weight: bold;
+}
+
+td a {
+    color: blue;
+    text-decoration: underline;
+}
+
+td a:hover {
+    color: darkblue;
+}
 h1, h2, h3, h4, h5, h6 {
     color: #00bcd4;
     font-family: 'Star Jedi', sans-serif;
