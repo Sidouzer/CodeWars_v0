@@ -5,7 +5,7 @@
 </head>
 <body>
 
-    <h2>Formulaire de Création de Vaisseau</h2>
+    <h2>Create new ship</h2>
 
     <form action="#" th:action="@{/ships/new}" th:object="${ship}" method="post">
         
@@ -22,6 +22,19 @@
         <br><br>
 
         <button type="submit">Créer le Vaisseau</button>
+    </form>
+
+    <h2>Create new model ship</h2>
+    <form action="#" th:action="@{/models/new}" th:object="${vehicule}" method="post">
+        
+        <label for="type">Type de Modèle :</label>
+        <select id="type" th:field="*{type}">
+            <option value="X-Wing">X-Wing</option>
+            <option value="Y-Wing">Y-Wing</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Créer le modèle</button>
     </form>
 
 </body>

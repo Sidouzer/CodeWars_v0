@@ -23,7 +23,7 @@ public class ShipsController {
 
     @Autowired
     ShipServiceImpl shipsService;
-   
+
     @Autowired
     VehiculeServiceImpl vehiculeService;
 
@@ -31,14 +31,14 @@ public class ShipsController {
     public String getShipList(@RequestParam(value = "status", required = false) List<String> status, Model model) {
         List<Ship> ships = shipsService.findAll().stream().collect(Collectors.toList());
 
-        List<Ship> filteredShips = (status == null || status.isEmpty()) ? ships :
-            ships.stream().filter(ship -> status.contains(ship.getStatus().toString()))
-                .collect(Collectors.toList());
+        List<Ship> filteredShips = (status == null || status.isEmpty()) ? ships
+                : ships.stream().filter(ship -> status.contains(ship.getStatus().toString()))
+                        .collect(Collectors.toList());
 
         Vehicule vehicule = new Vehicule("Model X", "SpaceX", 2025, 2026);
-        vehiculeService.save(vehicule); 
+        vehiculeService.save(vehicule);
         Ship shipTest = new Ship(1L, ShipStatus._OPE, vehicule);
-        shipsService.save(shipTest); 
+        shipsService.save(shipTest);
 
         model.addAttribute("ships", filteredShips);
         model.addAttribute("status", status);
@@ -61,19 +61,13 @@ public class ShipsController {
         return "shipInfo";
     }
 
-@GetMapping("/ships/new")
-public String showCreateShipForm(Model model) {
+    @GetMapping("/ships/new")
+    public String showCreateShipForm(Model model) {
 
-    model.addAttribute("ship", new Ship()); 
-    model.addAttribute("statuses", ShipStatus.values()); 
-    model.addAttribute("vehicules", vehiculeService.findAll()); 
-    
-    return "formNewsShip"; 
+        model.addAttribute("ship", new Ship());
+        model.addAttribute("statuses", ShipStatus.values());
+        model.addAttribute("vehicules", vehiculeService.findAll());
+
+        return "formNewShip";
+    }
 }
-
-}
-
-
-    
-
-
