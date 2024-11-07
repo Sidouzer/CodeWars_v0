@@ -5,7 +5,6 @@ import java.util.Set;
 
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
 import group_4.galaxyMyAdmin.Enumerations.ShipStatus;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +26,7 @@ public class Ship implements Serializable{
 
     
 
-    @OneToMany(mappedBy = "ship", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ship")
     Set<Activity> activities;
 
     public Ship(Long id, ShipStatus status, Vehicule model) {
@@ -73,7 +72,7 @@ public class Ship implements Serializable{
 
      public boolean isAvailable() {
         for(Activity activity : this.activities) {
-            if(activity.getMission().status == MissionStatus._ONGOING) {
+            if(activity.getMission().getStatus() == MissionStatus._ONGOING) {
                 return false;
             }
         }

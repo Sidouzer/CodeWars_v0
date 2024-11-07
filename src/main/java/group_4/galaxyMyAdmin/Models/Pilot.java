@@ -38,7 +38,7 @@ public class Pilot implements Serializable{
 
     int flightHours;
 
-    @OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pilot")
     Set<Activity> activities;
 
     public Pilot() {
@@ -145,7 +145,7 @@ public class Pilot implements Serializable{
 
     public boolean isAvailable() {
         for(Activity activity : this.activities) {
-            if(activity.getMission().status == MissionStatus._ONGOING) {
+            if(activity.getMission().getStatus() == MissionStatus._ONGOING) {
                 return false;
             }
         }
