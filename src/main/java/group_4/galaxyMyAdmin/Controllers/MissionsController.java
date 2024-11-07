@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import group_4.galaxyMyAdmin.Models.Activity;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
 import group_4.galaxyMyAdmin.Models.Ship;
+import group_4.galaxyMyAdmin.Services.ActivityServiceImpl;
 import group_4.galaxyMyAdmin.Services.MissionServiceImpl;
 import group_4.galaxyMyAdmin.Services.PilotServiceImpl;
 import group_4.galaxyMyAdmin.Services.ShipServiceImpl;
@@ -36,94 +39,104 @@ public class MissionsController {
     @Autowired
     private ShipServiceImpl shipService;
 
+    @Autowired
+    private ActivityServiceImpl activityService;
+
     @GetMapping("/missions")
     public String getMissions(Model model) {
-        // Récupère toutes les missions
         List<Mission> allMissions = new ArrayList<>(missionService.findAll());
 
-        // Filtre les missions en fonction de leur statut
+        // Filtre les missions par statut
         List<Mission> ongoingMissions = allMissions.stream()
             .filter(mission -> mission.getStatus() == MissionStatus._ONGOING)
             .collect(Collectors.toList());
-
         List<Mission> succededMissions = allMissions.stream()
             .filter(mission -> mission.getStatus() == MissionStatus._SUCCESS)
             .collect(Collectors.toList());
-
         List<Mission> failureMissions = allMissions.stream()
             .filter(mission -> mission.getStatus() == MissionStatus._FAIL)
             .collect(Collectors.toList());
-            
-        // Ajoute les missions filtrées au modèle
+
+        // Ajoute des missions filtrées au modèle
         model.addAttribute("ongoingMissions", ongoingMissions);
         model.addAttribute("succededMissions", succededMissions);
         model.addAttribute("failureMissions", failureMissions);
 
-        return "missions"; // Renvoie à la vue `missions.html`
+        return "missions";
     }
 
     @GetMapping("/missions/{id}")
     public String getMissionDetails(@PathVariable Long id, Model model) {
-        // Récupère la mission par son ID
         Mission mission = missionService.findById(id);
-        
-        // Ajoute la mission au modèle
         model.addAttribute("mission", mission);
-        
-        // Récupère les activités associées pour obtenir les pilots et vaisseaux
-        List<Activity> activities = mission.getActivities().stream().collect(Collectors.toList());
 
-        // Ajoute les activités au modèle pour l'affichage dans la vue
+        List<Activity> activities = new ArrayList<>(mission.getActivities());
         model.addAttribute("activities", activities);
 
-        // Retourner la vue des détails de la mission
         return "mission-details";
-}
+    }
 
-        // Affiche le formulaire de création de mission
     @GetMapping("/missions/new")
     public String showMissionForm(Model model) {
         model.addAttribute("mission", new Mission());
-            
-        // Récupère les pilotes opérationnels
-        List<Pilot> operationalPilots = (List<Pilot>) pilotService.findByStatus(PilotStatus._OPE);
 
-        // Filtre pour ne garder que ceux qui sont disponibles
-        List<Pilot> availableOperationalPilots = operationalPilots.stream()
-            .filter(Pilot::isAvailable) 
+        // Récupère des pilotes et vaisseaux opérationnels et disponibles
+        List<Pilot> operationalPilots = pilotService.findByStatus(PilotStatus._OPE).stream()
+            .filter(Pilot::isAvailable)
             .collect(Collectors.toList());
-
-        // Récupère les vaisseaux opérationnels
-        List<Ship> operationalShips = shipService.findByStatus(ShipStatus._OPE);
-
-        // Filtre pour ne garder que les vaisseaux disponibles
-        List<Ship> availableOperationalShips = operationalShips.stream()
+        List<Ship> operationalShips = shipService.findByStatus(ShipStatus._OPE).stream()
             .filter(Ship::isAvailable)
             .collect(Collectors.toList());
 
-        // Ajoute les pilotes et vaisseaux filtrés au modèle
-        model.addAttribute("operationalPilots", availableOperationalPilots);
-        model.addAttribute("operationalShips", availableOperationalShips);
+        model.addAttribute("operationalPilots", operationalPilots);
+        model.addAttribute("operationalShips", operationalShips);
 
         return "mission-form";
-        }
-
-    // Gère la soumission du formulaire de création de mission
-    @PostMapping("/missions/new")
-    public String createMission(@ModelAttribute("mission") Mission mission,
-                                @RequestParam Long pilotId,
-                                @RequestParam Long shipId) {
-        // Associe le pilote et le vaisseau sélectionnés à la mission
-        Pilot pilot = pilotService.findById(pilotId);
-        Ship ship = shipService.findById(shipId);
-        
-        mission.setPilot(pilot);
-        mission.setShip(ship);
-        
-        // Enregistre la mission
-        missionService.save(mission);
-        
-        return "redirect:/missions"; // Redirige vers la liste des missions
     }
-}
 
+    @PostMapping("/missions/new")
+    public String createMission(@Valid @ModelAttribute("mission") Mission mission,
+                                BindingResult result,
+                                @RequestParam List<Long> pilotIds,
+                                @RequestParam List<Long> shipIds,
+                                Model model) {
+        if (result.hasErrors()) {
+            // Recharge les pilotes et vaisseaux opérationnels et disponibles en cas d'erreurs
+            List<Pilot> operationalPilots = pilotService.findByStatus(PilotStatus._OPE).stream()
+                .filter(Pilot::isAvailable)
+                .collect(Collectors.toList());
+            List<Ship> operationalShips = shipService.findByStatus(ShipStatus._OPE).stream()
+                .filter(Ship::isAvailable)
+                .collect(Collectors.toList());
+    
+            model.addAttribute("operationalPilots", operationalPilots);
+            model.addAttribute("operationalShips", operationalShips);
+    
+            return "mission-form";
+        }
+    
+        // Sauvegarde d'abord la mission pour obtenir un ID
+        missionService.save(mission);
+    
+        // Pour chaque combinaison de pilote et vaisseau, crée une activité et l'enregistre individuellement
+        for (Long pilotId : pilotIds) {
+            Pilot pilot = pilotService.findById(pilotId);
+            for (Long shipId : shipIds) {
+                Ship ship = shipService.findById(shipId);
+                
+                // Crée une nouvelle activité pour chaque combinaison de pilote et vaisseau
+                Activity activity = new Activity();
+                activity.setPilot(pilot);
+                activity.setShip(ship);
+                activity.setMission(mission);  // Associe chaque activité à la mission
+    
+                // Sauvegarde chaque activité individuellement
+                activityService.save(activity);
+            }
+        }
+    
+        return "redirect:/missions";
+    }
+    
+
+}

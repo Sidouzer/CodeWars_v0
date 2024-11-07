@@ -1,42 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Pilots</title>
+    <title>Mission Creation</title>
     <script th:src="@{/js/selectMissionPilot.js}" defer></script>
 </head>
 
 <body>
     <main></main>
-    <form action="/missions/save" method="post">
+    <form action="/missions/save" method="post" th:object="${mission}" onsubmit="return validateSelection()">
         <label for="title">Title</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" th:field="*{title}" required>
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></span>
 
         <label for="description">Description</label>
-        <textarea id="description" name="description" required></textarea>
+        <textarea id="description" name="description" th:field="*{description}" required></textarea>
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error"></span>
 
         <label>Mission Type:</label>
-        <input type="radio" id="training" name="type" value="TRAINING" onclick="selectTraining(event)">
+        <input type="radio" id="training" name="type" value="TRAINING" th:field="*{type}" onclick="selectTraining(event)">
         <label for="training">Training</label>
-        <input type="radio" id="battle" name="type" value="BATTLE" onclick="selectBattle(event)">
+        <input type="radio" id="battle" name="type" value="BATTLE" th:field="*{type}" onclick="selectBattle(event)">
         <label for="battle">Battle</label>
+        <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="error"></span>
 
-        <label for="pilot">Pilot</label>
-        <select id="pilot" name="pilotId">
+        <label for="pilot">Pilots (Select multiple)</label>
+        <select id="pilot" name="pilotIds" th:field="*{pilotIds}" multiple size="5">
             <th:block th:each="pilot : ${operationalPilots}">
-                <option th:value="${pilot.id}" th:text="'${pilot.lastname}' + '${pilot.firstname}'"
-                    th:attr="rank=${pilot.rank}"></option>
+                <option th:value="${pilot.id}" th:text="'${pilot.lastname}' + ' ' + '${pilot.firstname}'"
+                        th:attr="rank=${pilot.rank}"></option>
             </th:block>
         </select>
+        <span th:if="${#fields.hasErrors('pilotIds')}" th:errors="*{pilotIds}" class="error"></span>
 
-        <label for="ship">Ship</label>
-        <select id="ship" name="shipId">
+        <label for="ship">Ships (Select multiple)</label>
+        <select id="ship" name="shipIds" th:field="*{shipIds}" multiple size="5">
             <th:block th:each="ship : ${operationalShips}">
                 <option th:value="${ship.id}" th:text="${ship.model.name}"></option>
             </th:block>
         </select>
+        <span th:if="${#fields.hasErrors('shipIds')}" th:errors="*{shipIds}" class="error"></span>
+
+        <div class="error" id="selectionError" style="display:none;">Please select an equal number of pilots and ships.</div>
 
         <button type="submit">OK</button>
     </form>
 
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+
+    <script>
+        function validateSelection() {
+            const pilotSelect = document.getElementById("pilot");
+            const shipSelect = document.getElementById("ship");
+            const selectionError = document.getElementById("selectionError");
+
+            // Count the selected pilots and ships
+            const pilotCount = Array.from(pilotSelect.selectedOptions).length;
+            const shipCount = Array.from(shipSelect.selectedOptions).length;
+
+            if (pilotCount !== shipCount) {
+                selectionError.style.display = "block";
+                return false; // Prevent form submission
+            } else {
+                selectionError.style.display = "none";
+                return true; // Allow form submission
+            }
+        }
+    </script>
 </body>
+</html>
