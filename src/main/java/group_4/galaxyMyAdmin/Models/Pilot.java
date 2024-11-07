@@ -145,7 +145,7 @@ public class Pilot implements Serializable{
 
     public boolean isAvailable() {
         for(Activity activity : this.activities) {
-            if(activity.getMission().status == MissionStatus._ONGOING) {
+            if(activity.getMission().getStatus() == MissionStatus._ONGOING) {
                 return false;
             }
         }
