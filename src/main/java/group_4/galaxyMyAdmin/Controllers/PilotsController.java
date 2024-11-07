@@ -75,14 +75,14 @@ public class PilotsController {
         return "pilotInfo";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/new")
     public String getMethodName(Model model) {
         model.addAttribute("pilot", new Pilot());
         model.addAttribute("pilotRaces", Race.values());
         return "pilotCreation";
     }
     
-    @PostMapping("/create")
+    @PostMapping("/new")
     public String createPilot(@ModelAttribute Pilot pilot,BindingResult result, Model model) {
         pilotValidator.validate(pilot, result);
         if (result.hasErrors()) {
