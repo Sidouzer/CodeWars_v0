@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import group_4.galaxyMyAdmin.Enumerations.ShipStatus;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Ship;
+import group_4.galaxyMyAdmin.Models.Vehicule;
 import group_4.galaxyMyAdmin.Services.ShipServiceImpl;
 import group_4.galaxyMyAdmin.Services.VehiculeServiceImpl;
 
@@ -34,12 +35,13 @@ public class ShipsController {
             ships.stream().filter(ship -> status.contains(ship.getStatus().toString()))
                 .collect(Collectors.toList());
 
-        /*Vehicule vehicule = new Vehicule("Model X", "SpaceX", 2025, 2026);
-        vehicule = vehiculeService.save(vehicule); 
+        Vehicule vehicule = new Vehicule("Model X", "SpaceX", 2025, 2026);
+        vehiculeService.save(vehicule); 
         Ship shipTest = new Ship(1L, ShipStatus._OPE, vehicule);
-        shipsService.save(shipTest);*/
+        shipsService.save(shipTest); 
 
         model.addAttribute("ships", filteredShips);
+        model.addAttribute("status", status);
         return "ships";
     }
 

@@ -10,7 +10,7 @@ import group_4.galaxyMyAdmin.Services.PilotServiceImpl;
 class GalaxyMyAdminApplicationTests {
 
 	@Autowired
-	PilotServiceImpl piloteService;
+	PilotServiceImpl pilotService;
 
 	@Test
 	void contextLoads() {

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Pilot Registration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div th:replace="~{header :: header}"></div>
+	<h1>Registration Form</h1>
+    <form action="#" th:action="@{/pilots/create}" th:object="${pilot}" method="post">
+    	<label>Firstname : </label><input type="text" th:maxlength="50" th:field="*{firstname}" />
+        <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></p>
+        <label>Lastname : </label><input type="text" th:maxlength="50" th:field="*{lastname}" />
+        <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></p>
+        <label>Race : </label><input list="pilot-race" th:field="*{race}" />
+        <p th:if="${#fields.hasErrors('race')}" th:errors="*{race}"></p>
+        <label>Current Age : </label><input type="number" th:min="10" th:max="800" th:field="*{registrationAge}" />
+        <p th:if="${#fields.hasErrors('registrationAge')}" th:errors="*{registrationAge}"></p>
+        <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+    </form>
+
+    <datalist id="pilot-race">
+        <option th:each="race : ${pilotRaces}" th:value="${race}"></option>
+    </datalist>
+
+</body>
+</html>

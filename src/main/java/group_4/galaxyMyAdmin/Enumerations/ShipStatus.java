@@ -2,7 +2,7 @@ package group_4.galaxyMyAdmin.Enumerations;
 
 public enum ShipStatus {
     _OPE("Operational"),
-    _DAMAGED("Under repair"),
+    _DAMAGED("Maintenance"),
     _DESTROYED("Destroyed");
 
     String value;

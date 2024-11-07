@@ -1,36 +1,46 @@
 package group_4.galaxyMyAdmin.Models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
 import group_4.galaxyMyAdmin.Enumerations.MissionType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.*;
 
 @Entity(name = "missions")
-public class Mission implements Serializable{
+public class Mission implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
-    String title;
+    @NotBlank(message = "Title is required")
+    private String title;
 
-    MissionType type;
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Mission type is required")
+    private MissionType type;
 
-    String description;
+    @NotBlank(message = "Description is required")
+    private String description;
 
-    int flightHours;
+    @Min(value = 0, message = "Flight hours cannot be negative")
+    private int flightHours;
 
-    MissionStatus status;
+    @Enumerated(EnumType.STRING)
+    private MissionStatus status;
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
-    Set<Activity> activities;
+    private Set<Activity> activities = new HashSet<>();
 
     public Mission() {
     }
@@ -95,5 +105,13 @@ public class Mission implements Serializable{
         this.title = title;
     }
 
-    
+    public void setPilot(Pilot pilot) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPilot'");
+    }
+
+    public void setShip(Ship ship) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setShip'");
+    }
 }

@@ -1,0 +1,142 @@
+*   [33mcommit 2bf92f0e3e1e6d0b881b2a81148df3d054f2456b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+[31m|[m[32m\[m  Merge: 200b644 95ce5a2
+[31m|[m [32m|[m Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>
+[31m|[m [32m|[m Date:   Tue Nov 5 16:51:30 2024 +0000
+[31m|[m [32m|[m 
+[31m|[m [32m|[m     Merge branch 'Robinson' into 'main'
+[31m|[m [32m|[m     
+[31m|[m [32m|[m     PilotController/getMissionsList
+[31m|[m [32m|[m     
+[31m|[m [32m|[m     See merge request 2024-1-cda-avril-2024/galaxiemyadmin!5
+[31m|[m [32m|[m 
+[31m|[m * [33mcommit 95ce5a2b8fda9218918426784a39a2cb3df88602[m[33m ([m[1;31morigin/Robinson[m[33m, [m[1;32mRobinson[m[33m)[m
+[31m|[m [32m|[m Author: Robinson <robinson.lhuillier@gmail.com>
+[31m|[m [32m|[m Date:   Tue Nov 5 17:50:48 2024 +0100
+[31m|[m [32m|[m 
+[31m|[m [32m|[m     PilotController/getMissionsList
+[31m|[m [32m|[m   
+* [32m|[m   [33mcommit 200b644d8143926b160f0192cfbd4ad0c6a1015d[m
+[33m|[m[34m\[m [32m\[m  Merge: 9e776c2 1c0a7fe
+[33m|[m [34m|[m [32m|[m Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>
+[33m|[m [34m|[m [32m|[m Date:   Tue Nov 5 16:21:06 2024 +0000
+[33m|[m [34m|[m [32m|[m 
+[33m|[m [34m|[m [32m|[m     Merge branch 'kaoutar' into 'main'
+[33m|[m [34m|[m [32m|[m     
+[33m|[m [34m|[m [32m|[m     Kaoutar
+[33m|[m [34m|[m [32m|[m     
+[33m|[m [34m|[m [32m|[m     See merge request 2024-1-cda-avril-2024/galaxiemyadmin!4
+[33m|[m [34m|[m [32m|[m   
+[33m|[m * [32m|[m   [33mcommit 1c0a7fe26bf1eccaa3d6059722d05c8b5416e2f1[m
+[33m|[m [35m|[m[33m\[m [32m\[m  Merge: 9468eda 9e776c2
+[33m|[m [35m|[m[33m/[m [32m/[m  Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>
+[33m|[m[33m/[m[35m|[m [32m|[m   Date:   Tue Nov 5 16:20:57 2024 +0000
+[33m|[m [35m|[m [32m|[m   
+[33m|[m [35m|[m [32m|[m       Merge branch 'main' into 'kaoutar'
+[33m|[m [35m|[m [32m|[m       
+[33m|[m [35m|[m [32m|[m       # Conflicts:
+[33m|[m [35m|[m [32m|[m       #   src/main/java/group_4/galaxyMyAdmin/Services/MissionServiceImpl.java
+[33m|[m [35m|[m [32m|[m   
+* [35m|[m [32m|[m   [33mcommit 9e776c2a66c0db474d92b63d139c55ebb688eb8d[m
+[1;31m|[m[1;32m\[m [35m\[m [32m\[m  Merge: 9345e25 5a193de
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m Date:   Tue Nov 5 16:19:44 2024 +0000
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m 
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m     Merge branch 'sid' into 'main'
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m     
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m     sid ksouri's avatar Mission infos + controller modifié
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m     
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m     See merge request 2024-1-cda-avril-2024/galaxiemyadmin!3
+[1;31m|[m [1;32m|[m [35m|[m [32m|[m   
+[1;31m|[m * [35m|[m [32m|[m   [33mcommit 5a193dee4ec0ef8a2bcfc31016039fca328d39ed[m
+[1;31m|[m [1;33m|[m[1;31m\[m [35m\[m [32m\[m  Merge: 65d0e51 9345e25
+[1;31m|[m [1;33m|[m[1;31m/[m [35m/[m [32m/[m  Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>
+[1;31m|[m[1;31m/[m[1;33m|[m [35m|[m [32m|[m   Date:   Tue Nov 5 16:19:34 2024 +0000
+[1;31m|[m [1;33m|[m [35m|[m [32m|[m   
+[1;31m|[m [1;33m|[m [35m|[m [32m|[m       Merge branch 'main' into 'sid'
+[1;31m|[m [1;33m|[m [35m|[m [32m|[m       
+[1;31m|[m [1;33m|[m [35m|[m [32m|[m       # Conflicts:
+[1;31m|[m [1;33m|[m [35m|[m [32m|[m       #   pom.xml
+[1;31m|[m [1;33m|[m [35m|[m [32m|[m       #   src/main/java/group_4/galaxyMyAdmin/Models/Mission.java
+[1;31m|[m [1;33m|[m [35m|[m [32m|[m   
+* [1;33m|[m [35m|[m [32m|[m   [33mcommit 9345e25cf244e5dd80caab48f427dda5f5d8df7d[m
+[1;35m|[m[32m\[m [1;33m\[m [35m\[m [32m\[m  Merge: cb0ea93 bed6f95
+[1;35m|[m [32m|[m [1;33m|[m[32m_[m[35m|[m[32m/[m  Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>
+[1;35m|[m [32m|[m[32m/[m[1;33m|[m [35m|[m   Date:   Tue Nov 5 16:15:27 2024 +0000
+[1;35m|[m [32m|[m [1;33m|[m [35m|[m   
+[1;35m|[m [32m|[m [1;33m|[m [35m|[m       Merge branch 'Robinson' into 'main'
+[1;35m|[m [32m|[m [1;33m|[m [35m|[m       
+[1;35m|[m [32m|[m [1;33m|[m [35m|[m       /pilot + /pilot/id (missionsList untested)
+[1;35m|[m [32m|[m [1;33m|[m [35m|[m       
+[1;35m|[m [32m|[m [1;33m|[m [35m|[m       See merge request 2024-1-cda-avril-2024/galaxiemyadmin!2
+[1;35m|[m [32m|[m [1;33m|[m [35m|[m 
+[1;35m|[m * [1;33m|[m [35m|[m [33mcommit bed6f95bd8f506c269dc2fa210fef93c9f9f52a3[m
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m Author: Robinson <robinson.lhuillier@gmail.com>
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m Date:   Tue Nov 5 17:12:18 2024 +0100
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m 
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m     /pilot + /pilot/id (missionsList untested)
+[1;35m|[m [1;36m|[m [1;33m|[m [35m|[m 
+* [1;36m|[m [1;33m|[m [35m|[m [33mcommit cb0ea93cde8e67fa3409e0711954c13f7bbfe306[m
+[31m|[m[1;36m\[m[1;36m|[m [1;33m|[m [35m|[m Merge: 4bace49 f354d6f
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m Author: kaoutar laabid <slmkw6@gmail.com>
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m Date:   Tue Nov 5 14:59:51 2024 +0000
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m 
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m     Merge branch 'Robinson' into 'main'
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m     
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m     Robinson
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m     
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m     See merge request 2024-1-cda-avril-2024/galaxiemyadmin!1
+[31m|[m [1;36m|[m [1;33m|[m [35m|[m 
+[31m|[m * [1;33m|[m [35m|[m [33mcommit f354d6fe2e0c686d9a071ee6e98973704cf8116e[m
+[31m|[m [32m|[m [1;33m|[m [35m|[m Author: Robinson <robinson.lhuillier@gmail.com>
+[31m|[m [32m|[m [1;33m|[m [35m|[m Date:   Tue Nov 5 14:10:44 2024 +0100
+[31m|[m [32m|[m [1;33m|[m [35m|[m 
+[31m|[m [32m|[m [1;33m|[m [35m|[m     Page pilots avec search() et filterByStatus()
+[31m|[m [32m|[m [1;33m|[m [35m|[m 
+[31m|[m [32m|[m * [35m|[m [33mcommit 65d0e51c138d820e6f6049d42c9d61609ea1bd0c[m
+[31m|[m [32m|[m [32m|[m [35m|[m Author: sid <sid.ksouri@gmail.com>
+[31m|[m [32m|[m [32m|[m [35m|[m Date:   Tue Nov 5 15:45:30 2024 +0100
+[31m|[m [32m|[m [32m|[m [35m|[m 
+[31m|[m [32m|[m [32m|[m [35m|[m     Mission infos + controller modifié
+[31m|[m [32m|[m [32m|[m [35m|[m 
+[31m|[m [32m|[m * [35m|[m [33mcommit cdaa62f5f34dd8bacddeaa20378a92a2e82f36ac[m
+[31m|[m [32m|[m[31m/[m [35m/[m  Author: sid <sid.ksouri@gmail.com>
+[31m|[m[31m/[m[32m|[m [35m|[m   Date:   Tue Nov 5 14:08:22 2024 +0100
+[31m|[m [32m|[m [35m|[m   
+[31m|[m [32m|[m [35m|[m       Mission + Missions(controller + vue)
+[31m|[m [32m|[m [35m|[m 
+[31m|[m [32m|[m * [33mcommit 9468eda356a547c42048d96621ce81f65d9cde40[m
+[31m|[m [32m|[m[31m/[m[34m|[m Merge: 4bace49 a73969a
+[31m|[m[31m/[m[32m|[m [34m|[m Author: kaw <slmkw6@gmail.com>
+[31m|[m [32m|[m [34m|[m Date:   Tue Nov 5 16:05:00 2024 +0100
+[31m|[m [32m|[m [34m|[m 
+[31m|[m [32m|[m [34m|[m     Merge branch 'Robinson' into kaoutar
+[31m|[m [32m|[m [34m|[m 
+[31m|[m [32m|[m * [33mcommit a73969a779788102eea1b6836223cdcd40e4261c[m
+[31m|[m [32m|[m[32m/[m  Author: kaw <slmkw6@gmail.com>
+[31m|[m [32m|[m   Date:   Tue Nov 5 15:54:51 2024 +0100
+[31m|[m [32m|[m   
+[31m|[m [32m|[m       Fichier Ship et debut du vehicule
+[31m|[m [32m|[m 
+[31m|[m * [33mcommit 420912baa26072c90c9081ffc029c003617e35a3[m
+[31m|[m [34m|[m Author: Robinson <robinson.lhuillier@gmail.com>
+[31m|[m [34m|[m Date:   Tue Nov 5 10:52:04 2024 +0100
+[31m|[m [34m|[m 
+[31m|[m [34m|[m     Pilot -> Pilot + Pilots(controller + vue)
+[31m|[m [34m|[m 
+* [34m|[m [33mcommit 4bace4998426bf6a8e1c2118603d349baf38297f[m
+[34m|[m [34m|[m Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>
+[34m|[m [34m|[m Date:   Tue Nov 5 07:47:07 2024 +0000
+[34m|[m [34m|[m 
+[34m|[m [34m|[m     MLD
+[34m|[m [34m|[m 
+* [34m|[m [33mcommit a99e240432211613f8c92edc7392e52cd51ab711[m
+[34m|[m[34m/[m  Author: Robinson LHUILLIER <robinson.lhuillier@gmail.com>
+[34m|[m   Date:   Tue Nov 5 07:45:59 2024 +0000
+[34m|[m   
+[34m|[m       MCD
+[34m|[m 
+* [33mcommit c7d29c087b2a9772705dc58ddca901e6f2bb2693[m
+  Author: Robinson <robinson.lhuillier@gmail.com>
+  Date:   Tue Nov 5 08:44:23 2024 +0100
+  
+      Initial commit

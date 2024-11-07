@@ -7,6 +7,7 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Models.Pilot;
 import group_4.galaxyMyAdmin.Repositories.PilotRepository;
 
@@ -35,6 +36,9 @@ public class PilotServiceImpl implements Service<Pilot>{
         pilRepo.save(obj);
     }
 
-    
+    public Collection<Pilot> findByStatus(PilotStatus status) {
+        return StreamSupport.stream(pilRepo.findByStatus(status).spliterator(), false)
+        .collect(Collectors.toList());
+} 
 
 }

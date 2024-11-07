@@ -1,14 +1,14 @@
 package group_4.galaxyMyAdmin.Services;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import group_4.galaxyMyAdmin.Enumerations.ShipStatus;
 import group_4.galaxyMyAdmin.Models.Ship;
 import group_4.galaxyMyAdmin.Repositories.ShipRepository;
 
@@ -35,9 +35,11 @@ public class ShipServiceImpl implements Service<Ship>{
     @Override
     public void save(Ship obj) {
         shipRepo.save(obj);
-       
-        
     }
 
+    public List<Ship> findByStatus(ShipStatus ope){
+        return StreamSupport.stream(shipRepo.findByStatus(ope).spliterator(), false)
+        .collect(Collectors.toList());
+    } 
     
 }
