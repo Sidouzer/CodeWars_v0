@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Mission end form</title>
+    <script></script>
+
+</head>
+
+<body>
+
+    <div th:replace="~{header :: header}"></div>
+
+    <main>
+        <section>
+            <h1 th:text="$'{mission.id}' + '{mission.title}"></h1>
+            <div>
+                <div>
+                    <label for="flightHours">Hours of flight</label>
+                    <input type="number">
+                </div>
+                <form th:action="@/mission/${mission.id}/close" th:object="${mission}">
+                    <div>
+                        <h2>Human ressources</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Firstname</th>
+                                    <th>Surname</th>
+                                    <th>Rank</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="pilot: ${missionPilots}">
+                                    <td th:text="${pilot.id}"></td>
+                                    <td th:text="${pilot.firstname}"></td>
+                                    <td th:text="${pilot.lastname}"></td>
+                                    <td th:text="${pilot.rank}"></td>
+                                    <td><select name="pilotStatuses[${pilot.id}]" th:id="pilot_${pilot.id}">
+                                        <option value="">Select a status</option>
+                                        <option th:each="status : ${pilotStatuses}" 
+                                                th:value="${status}" 
+                                                th:text="${status}">
+                                        </option>
+                                    </select></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h2>Material ressources</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Model</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="ship: ${missionShips}">
+                                    <td th:text="${ship.id}"></td>
+                                    <td th:text="${ship.model.name  }"></td>
+                                    <td><select th:name="shipStatuses[${ship.id}]" th:id="ship_${ship.id}">
+                                        <option value="">Select a status</option>
+                                        <option th:each="status : ${shipStatuses}" 
+                                                th:value="${status}" 
+                                                th:text="${status}">
+                                        </option>
+                                    </select></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <select th:field="*{status}" th:name="missionStatus" th:id="missionStatus">
+                            <option value="">Select a status</option>
+                            <option value="Succeded">Succeded</option>
+                            <option value="Failure">Failed</option>
+                        </select>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
