@@ -21,9 +21,6 @@ public class VehiculeServiceImpl implements Service<Vehicule>{
         return StreamSupport.stream(vehiRepo.findAll().spliterator(), false).collect(Collectors.toList());
     }
         
-    
-    
-
     @Override
     public Vehicule findById(Long id) {
         try {
@@ -39,7 +36,7 @@ public class VehiculeServiceImpl implements Service<Vehicule>{
         vehiRepo.save(obj);
     }
 
-    
+
 
 
 }

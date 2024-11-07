@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <div th:replace="~{header :: header}"></div>
+
+    <main>
+        <section>
+            <div class="info-box">
+                <p th:text="'Id: ' + ${ship.id}"></p>
+                <p th:text="'Status: ' + ${ship.status}"></p>
+                <p th:text="'Model: ' + ${ship.model.name}"></p>
+            </div>
+        </section>
+        <div>
+            <h2>Missions</h2>
+            <th:block th:if="${!shipMissions.isEmpty()}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="mission : ${shipMissions}">
+                            <td th:text="${mission.title}"></td>
+                            <td th:text="${mission.status}"></td>
+                            <td><a href="@{/mission(id=${mission.id})}">Details</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </th:block>
+            <th:block th:unless="${!shipMissions.isEmpty()}">
+                <p>NO MISSIONS YET</p>
+            </th:block>
+        </div>
+    </main>
+</body>
+</html>

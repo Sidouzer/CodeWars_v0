@@ -22,6 +22,16 @@ public class Vehicule implements Serializable{
 
     int maxCapacity;
 
+     public Vehicule(String name, String type, int minCapacity, int maxCapacity) {
+        this.name = name;
+        this.type = type;
+        this.minCapacity = minCapacity;
+        this.maxCapacity = maxCapacity;
+       
+    }
+    public Vehicule() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -61,6 +71,4 @@ public class Vehicule implements Serializable{
     public void setMaxCapacity(int maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
-
-    
 }
