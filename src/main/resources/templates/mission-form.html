@@ -10,31 +10,29 @@
     <main>
         <form action="/missions/new" method="get">
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" value="${title}" required>
+            <input type="text" id="title" name="title" th:value="${title}" required>
 
             <label for="description">Description</label>
-            <textarea id="description" name="description" required>${description}</textarea>
+            <textarea id="description" name="description" th:text="${description}" required></textarea>
 
             <label>Mission Type:</label>
-            <input type="radio" id="training" name="type" value="_TRAINING">
+            <input type="radio" id="training" name="type" value="_TRAINING" th:checked="${type == '_TRAINING'}">
             <label for="training">Training</label>
-            <input type="radio" id="battle" name="type" value="_BATTLE">
+            <input type="radio" id="battle" name="type" value="_BATTLE" th:checked="${type == '_BATTLE'}">
             <label for="battle">Battle</label>
 
             <div>
-
-                    <th:block th:each="activity : ${missionActivities}">
-                        <div>
-                            <p>Pilot: <span th:text="${activity.pilot.lastname} + ' ' + ${activity.pilot.firstname}"></span> - 
-                            Ship: <span th:text="${activity.ship.model.name}"></span></p>
-                        </div>
-                    </th:block>
-
+                <th:block th:each="activity : ${missionActivities}">
+                    <div th:if="${activity.pilot != null && activity.ship != null && activity.ship.model != null}">
+                        <p>Pilot: <span th:text="${activity.pilot.lastname} + ' ' + ${activity.pilot.firstname}"></span> - 
+                        Ship: <span th:text="${activity.ship.model.name}"></span></p>
+                    </div>
+                </th:block>
             </div>
 
             <div>
                 <label for="pilot">Pilot</label>
-                <select th:if="operationalPilots != null" name="idPilot">
+                <select th:if="${operationalPilots != null}" name="idPilot">
                     <th:block th:each="pilot : ${operationalPilots}">
                         <option th:value="${pilot.id}" th:text="${pilot.lastname} + ' - ' + ${pilot.firstname}"></option>
                     </th:block>
