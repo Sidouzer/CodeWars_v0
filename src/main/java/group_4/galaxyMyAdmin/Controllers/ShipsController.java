@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import group_4.galaxyMyAdmin.Enumerations.ShipStatus;
@@ -62,12 +64,26 @@ public class ShipsController {
     }
 
     @GetMapping("/ships/new")
-    public String showCreateShipForm(Model model) {
-
+    public String showCreateShipAndModelForm(Model model) {
         model.addAttribute("ship", new Ship());
+        model.addAttribute("vehicule", new Vehicule());
         model.addAttribute("statuses", ShipStatus.values());
         model.addAttribute("vehicules", vehiculeService.findAll());
-
         return "formNewShip";
     }
+
+    // Traiter la création d'un nouveau vaisseau
+    @PostMapping("/ships/new")
+    public String createShip(@ModelAttribute("ship") Ship ship) {
+        shipsService.save(ship);  // Sauvegarder le vaisseau avec statut et type
+        return "redirect:/ships";  // Redirige vers la liste des vaisseaux
+    }
+
+    // Traiter la création d'un nouveau modèle de vaisseau
+    @PostMapping("/models/new")
+    public String createVehicule(@ModelAttribute("vehicule") Vehicule vehicule) {
+        vehiculeService.save(vehicule);  // Sauvegarder le modèle avec nom et description
+        return "redirect:/models";  // Redirige vers la liste des modèles
+    }
 }
+

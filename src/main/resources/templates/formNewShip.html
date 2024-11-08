@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>New Ship</title>
+    <title>Create Ship and Model</title>
 </head>
 <body>
 
     <h2>Create new ship</h2>
-
-    <form action="#" th:action="@{/ships/new}" th:object="${ship}" method="post">
+    <form th:action="@{/ships/new}" th:object="${ship}" method="post">
         
-        <label for="status">Statut :</label>
-        <select id="status" th:field="*{status}">
-            <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}">Status</option>
-        </select>
-        <br><br>
-
-        <label for="model">Modèle :</label>
+        <label for="model">Model:</label>
         <select id="model" th:field="*{model}">
-            <option th:each="vehicule : ${vehicules}" th:value="${vehicule.id}" th:text="${vehicule.name}">Model</option>
-        </select>
-        <br><br>
-
-        <button type="submit">Créer le Vaisseau</button>
-    </form>
-
-    <h2>Create new model ship</h2>
-    <form action="#" th:action="@{/models/new}" th:object="${vehicule}" method="post">
-        
-        <label for="type">Type de Modèle :</label>
-        <select id="type" th:field="*{type}">
             <option value="X-Wing">X-Wing</option>
             <option value="Y-Wing">Y-Wing</option>
         </select>
         <br><br>
 
-        <button type="submit">Créer le modèle</button>
+        <button type="submit">Create Ship</button>
+    </form>
+
+    <h2>Create new model ship</h2>
+    <form th:action="@{/models/new}" th:object="${vehicule}" method="post">
+        
+        <label for="name">Model Name:</label>
+        <input id="name" type="text" th:field="*{name}" placeholder="Enter model name" required />
+        <br><br>
+
+        <label for="type">Model Type:</label>
+        <input id="type" type="text" th:field="*{type}" placeholder="Enter model type (e.g. X-Wing)" required />
+        <br><br>
+
+        <label for="minCapacity">Min Capacity:</label>
+        <input id="minCapacity" type="number" th:field="*{minCapacity}" min="0" required />
+        <br><br>
+
+        <label for="maxCapacity">Max Capacity:</label>
+        <input id="maxCapacity" type="number" th:field="*{maxCapacity}" min="1" required />
+        <br><br>
+
+        <button type="submit">Create Ship</button>
     </form>
 
 </body>
