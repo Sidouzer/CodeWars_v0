@@ -6,7 +6,6 @@ import java.util.Set;
 
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
 import group_4.galaxyMyAdmin.Enumerations.MissionType;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,7 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity(name = "missions")
 public class Mission implements Serializable {

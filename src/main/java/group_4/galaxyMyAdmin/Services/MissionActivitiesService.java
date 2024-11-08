@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import group_4.galaxyMyAdmin.Models.Activity;
-import group_4.galaxyMyAdmin.Models.Pilot;
 
 @Service
 public class MissionActivitiesService {

@@ -9,7 +9,7 @@
     <div th:replace="~{header :: header}"></div>
     <main>
 	<h1>Registration Form</h1>
-    <form action="#" th:action="@{/pilots/create}" th:object="${pilot}" method="post">
+    <form action="#" th:action="@{/pilots/new}" th:object="${pilot}" method="post">
     	<label>Firstname : </label><input type="text" th:maxlength="50" th:field="*{firstname}" />
         <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></p>
         <label>Lastname : </label><input type="text" th:maxlength="50" th:field="*{lastname}" />

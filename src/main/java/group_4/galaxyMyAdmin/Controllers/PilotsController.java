@@ -1,6 +1,5 @@
 package group_4.galaxyMyAdmin.Controllers;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import group_4.galaxyMyAdmin.Enumerations.PilotRank;
-import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Enumerations.Race;
 import group_4.galaxyMyAdmin.Models.Mission;
 import group_4.galaxyMyAdmin.Models.Pilot;
@@ -46,12 +43,6 @@ public class PilotsController {
         List<Pilot> filteredPilots = (status == null || status.isEmpty()) ? pilots : 
             pilots.stream().filter(pilot -> status.contains(pilot.getStatus().toString()))
             .collect(Collectors.toList());
-            
-        Pilot pilotTest = new Pilot("test", "testLastName", Race._HUMAN, LocalDate.now(), 10, PilotStatus._OPE, PilotRank._CAPTAIN);
-		pilotService.save(pilotTest);
-
-        Pilot pilotTest2 = new Pilot("ploup", "testLastName", Race._HUMAN, LocalDate.now(), 10, PilotStatus._OPE, PilotRank._APPRENTICE);
-		pilotService.save(pilotTest2);
 
         model.addAttribute("filteredPilots", filteredPilots);
         model.addAttribute("status", status);

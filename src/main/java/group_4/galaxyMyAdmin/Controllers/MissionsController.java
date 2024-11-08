@@ -101,7 +101,7 @@ public class MissionsController {
         List<Pilot> operationalPilots = pilotService.findByStatus(PilotStatus._OPE).stream()
                 .filter(Pilot::isAvailable)
                 .filter(pilot -> misActService.getMissionActivities().stream()
-                .noneMatch(activity -> activity.getPilot().equals(pilot)))
+                        .noneMatch(activity -> activity.getPilot() != null && activity.getPilot().equals(pilot)))
                 .collect(Collectors.toList());
 
         List<Ship> operationalShips = shipService.findByStatus(ShipStatus._OPE).stream()
@@ -115,6 +115,11 @@ public class MissionsController {
             activity.setShip(ship);
             misActService.addActivity(activity);
         }
+        model.addAttribute("title", title);
+        model.addAttribute("description", description);
+        model.addAttribute("type", type);
+        model.addAttribute("selectedPilot", idPilot);
+        model.addAttribute("selectedShip", idShip);
         model.addAttribute("missionActivities", misActService.getMissionActivities());
         model.addAttribute("operationalPilots", operationalPilots);
         model.addAttribute("operationalShips", operationalShips);
@@ -146,7 +151,7 @@ public class MissionsController {
 
         // Sauvegarde d'abord la mission pour obtenir un ID
         missionService.save(mission);
-
+        
         // Pour chaque combinaison de pilote et vaisseau, crée une activité et
         // l'enregistre individuellement
         for (Long pilotId : pilotIds) {
