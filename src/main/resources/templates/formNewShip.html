@@ -2,43 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Create Ship and Model</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
+    <div th:replace="~{header :: header}"></div>
 
-    <h2>Create new ship</h2>
-    <form th:action="@{/ships/new}" th:object="${ship}" method="post">
-        
-        <label for="model">Model:</label>
-        <select id="model" th:field="*{model}">
-            <option value="X-Wing">X-Wing</option>
-            <option value="Y-Wing">Y-Wing</option>
-        </select>
-        <br><br>
+    <!-- Conteneur pour le formulaire "Create new ship" -->
+    <div class="form-container">
+        <h2>Create new ship</h2>
+        <form th:action="@{/ships/new}" th:object="${ship}" method="post">
+            <table>
+                <tr>
+                    <td><label for="model">Model:</label></td>
+                    <td>
+                        <select id="model" th:field="*{model}">
+                            <option value="X-Wing">X-Wing</option>
+                            <option value="Y-Wing">Y-Wing</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <button type="submit">Create Ship</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
-        <button type="submit">Create Ship</button>
-    </form>
-
-    <h2>Create new model ship</h2>
-    <form th:action="@{/models/new}" th:object="${vehicule}" method="post">
-        
-        <label for="name">Model Name:</label>
-        <input id="name" type="text" th:field="*{name}" placeholder="Enter model name" required />
-        <br><br>
-
-        <label for="type">Model Type:</label>
-        <input id="type" type="text" th:field="*{type}" placeholder="Enter model type (e.g. X-Wing)" required />
-        <br><br>
-
-        <label for="minCapacity">Min Capacity:</label>
-        <input id="minCapacity" type="number" th:field="*{minCapacity}" min="0" required />
-        <br><br>
-
-        <label for="maxCapacity">Max Capacity:</label>
-        <input id="maxCapacity" type="number" th:field="*{maxCapacity}" min="1" required />
-        <br><br>
-
-        <button type="submit">Create Ship</button>
-    </form>
+    <!-- Conteneur pour le formulaire "Create new model ship" -->
+    <div class="form-container">
+        <h2>Create new model ship</h2>
+        <form th:action="@{/models/new}" th:object="${vehicule}" method="post">
+            <table>
+                <tr>
+                    <td><label for="name">Model Name:</label></td>
+                    <td><input id="name" type="text" th:field="*{name}" placeholder="Enter model name" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="type">Model Type:</label></td>
+                    <td><input id="type" type="text" th:field="*{type}" placeholder="Enter model type (e.g. X-Wing)" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="minCapacity">Min Capacity:</label></td>
+                    <td><input id="minCapacity" type="number" th:field="*{minCapacity}" min="0" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="maxCapacity">Max Capacity:</label></td>
+                    <td><input id="maxCapacity" type="number" th:field="*{maxCapacity}" min="1" required /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <button type="submit">Create Model</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 </body>
 </html>
