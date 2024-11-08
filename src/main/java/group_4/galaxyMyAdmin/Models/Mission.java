@@ -6,7 +6,6 @@ import java.util.Set;
 
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
 import group_4.galaxyMyAdmin.Enumerations.MissionType;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,7 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity(name = "missions")
 public class Mission implements Serializable {
@@ -39,7 +40,7 @@ public class Mission implements Serializable {
     @Enumerated(EnumType.STRING)
     private MissionStatus status;
 
-    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "mission")
     private Set<Activity> activities = new HashSet<>();
 
     public Mission() {
@@ -93,25 +94,18 @@ public class Mission implements Serializable {
         this.activities = activities;
     }
 
-
+    public void addActivitie(Activity activity) {
+        if(this.activities == null) {
+            activities = new HashSet<>();
+        }
+        activities.add(activity);
+    }
 
     public String getTitle() {
         return title;
     }
 
-
-
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setPilot(Pilot pilot) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPilot'");
-    }
-
-    public void setShip(Ship ship) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setShip'");
     }
 }

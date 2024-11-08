@@ -1,47 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Missions Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f4;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 60%;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #e0e0e0;
-            font-weight: bold;
-        }
-
-        td a {
-            color: blue;
-            text-decoration: underline;
-        }
-
-        td a:hover {
-            color: darkblue;
-        }
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <div th:replace="~{header :: header}"></div>
+    <main>
     <table>
         <thead>
             <tr>
@@ -79,5 +45,6 @@
             </tr>
         </tbody>
     </table>
+</main>
 </body>
 </html>

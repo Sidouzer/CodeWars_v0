@@ -3,12 +3,13 @@
 <head> 
     <title>Pilot Registration</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
     <div th:replace="~{header :: header}"></div>
+    <main>
 	<h1>Registration Form</h1>
-    <form action="#" th:action="@{/pilots/create}" th:object="${pilot}" method="post">
+    <form action="#" th:action="@{/pilots/new}" th:object="${pilot}" method="post">
     	<label>Firstname : </label><input type="text" th:maxlength="50" th:field="*{firstname}" />
         <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></p>
         <label>Lastname : </label><input type="text" th:maxlength="50" th:field="*{lastname}" />
@@ -23,6 +24,6 @@
     <datalist id="pilot-race">
         <option th:each="race : ${pilotRaces}" th:value="${race}"></option>
     </datalist>
-
+</main>
 </body>
 </html>

@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
 import group_4.galaxyMyAdmin.Enumerations.PilotRank;
+import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Enumerations.Race;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,7 +37,7 @@ public class Pilot implements Serializable{
 
     int flightHours;
 
-    @OneToMany(mappedBy = "pilot", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pilot")
     Set<Activity> activities;
 
     public Pilot() {
@@ -145,7 +144,7 @@ public class Pilot implements Serializable{
 
     public boolean isAvailable() {
         for(Activity activity : this.activities) {
-            if(activity.getMission().status == MissionStatus._ONGOING) {
+            if(activity.getMission().getStatus() == MissionStatus._ONGOING) {
                 return false;
             }
         }
