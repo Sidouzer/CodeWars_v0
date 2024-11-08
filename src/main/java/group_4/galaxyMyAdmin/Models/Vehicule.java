@@ -12,17 +12,17 @@ public class Vehicule implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    String type;
+    private String type;
 
-    int minCapacity;
+    private int minCapacity;
 
-    int maxCapacity;
+    private int maxCapacity;
 
-     public Vehicule(String name, String type, int minCapacity, int maxCapacity) {
+    public Vehicule(String name, String type, int minCapacity, int maxCapacity) {
         this.name = name;
         this.type = type;
         this.minCapacity = minCapacity;

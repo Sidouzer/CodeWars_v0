@@ -13,16 +13,16 @@ public class Activity implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
     @ManyToOne
-    Pilot pilot;
+    private Pilot pilot;
 
     @ManyToOne
-    Mission mission;
+    private Mission mission;
 
     @ManyToOne
-    Ship ship;
+    private Ship ship;
 
     public Activity() {
     }

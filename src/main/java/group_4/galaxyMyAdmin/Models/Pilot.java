@@ -19,26 +19,26 @@ public class Pilot implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
-    String firstname;
+    private String firstname;
 
-    String lastname;
+    private String lastname;
 
-    Race race;
+    private Race race;
 
-    LocalDate registrationDate;
+    private LocalDate registrationDate;
 
-    int registrationAge;
+    private int registrationAge;
 
-    PilotStatus status;
+    private PilotStatus status;
 
-    PilotRank rank;
+    private PilotRank rank;
 
-    int flightHours;
+    private int flightHours;
 
     @OneToMany(mappedBy = "pilot")
-    Set<Activity> activities;
+    private Set<Activity> activities;
 
     public Pilot() {
     }

@@ -17,17 +17,17 @@ public class Ship implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
-    ShipStatus status;
+    private ShipStatus status;
 
     @OneToOne
-    Vehicule model;
+    private Vehicule model;
 
     
 
     @OneToMany(mappedBy = "ship")
-    Set<Activity> activities;
+    private Set<Activity> activities;
 
     public Ship(Long id, ShipStatus status, Vehicule model) {
         this.id = id;
