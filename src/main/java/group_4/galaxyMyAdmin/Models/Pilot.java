@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Enumerations.MissionStatus;
 import group_4.galaxyMyAdmin.Enumerations.PilotRank;
+import group_4.galaxyMyAdmin.Enumerations.PilotStatus;
 import group_4.galaxyMyAdmin.Enumerations.Race;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
